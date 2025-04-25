@@ -9,7 +9,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // Variables para almacenar credenciales demo
     const credencialesDemo = [
         { usuario: 'admin', contrasena: 'admin123' },
-        { usuario: 'usuario', contrasena: 'usuario123' }
+        { usuario: 'cees ', contrasena: 'cees' }
+        
+        
     ];
 
     // Función para validar el formulario
