@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Constructora: Tecno Build</title>
+    <link rel="stylesheet" href="menu.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="icon" href="icon.png">
+</head>
+
+<body>
+    <nav class="sidebar close">
+        <header>
+            <div class="img-text">
+                <span class="imagen">
+                    <img src="logo.png" alt="logo">
+                </span>
+
+                <div class="text header-text">
+                    <span class="name">TecnoBuild</span>
+                    <span class="desc">Construccion inteligente</span>
+                </div>
+            </div>
+            <i class='bx bx-menu toggle' ></i>
+        </header>
+        
+        <div class="menu-bar">
+            <div class="menu">
+                <ul class="menu-links">
+                    <li class="nav-link">
+                        <a href="menu.html">
+                            <i class='bx bx-home icon' ></i>
+                            <span class="text nav-text">Obras</span>
+                        </a>
+                    </li>
+                    <li class="nav-link">
+                        <a href="../3. Herramienta/herramienta.html">
+                            <i class='bx bx-wrench icon' ></i>
+                            <span class="text nav-text">Herramienta</span>
+                        </a>
+                    </li>
+                    <li class="nav-link">
+                        <a href="#">
+                            <i class='bx bx-box icon' ></i>
+                            <span class="text nav-text">Material</span>
+                        </a>
+                    </li>
+                    <li class="nav-link">
+                        <a href="#">
+                            <i class='bx bx-file icon' ></i>
+                            <span class="text nav-text">Planos</span>
+                        </a>
+                    </li>
+                    <li class="nav-link">
+                        <a href="#">
+                            <i class='bx bx-archive icon' ></i>
+                            <span class="text nav-text">Permisos</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="bottom-content">
+                <li class="">
+                    <a href="../1. Inicio-sesion/login.html">
+                        <i class='bx bx-log-out icon' ></i>
+                        <span class="text nav-text">Salir</span>
+                    </a>
+                </li>
+
+                <li class="mode">
+                    <div class="moon-sun">
+                        <i class='bx bx-moon icon moon' ></i>
+                        <i class='bx bx-sun icon sun' ></i>
+                    </div>
+                    <span class="mode-text text">Modo oscuro</span>
+
+                    <div class="toggle-switch">
+                        <spam class="switch"></spam>
+                    </div>
+                </li>
+            </div>
+        </div>
+    </nav>
+
+    <section class="home">
+        <div class="text">Obras</div>
+        <button id="openModal">Agregar obra</button>
+    <div class="modal" id="formModal">
+        <div class="modal-content">
+            <h2>Obras</h2>
+            <form>
+                <label for="name">Nombre de la obra:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="ubicacion">Ubicacion:</label>
+                <input type="text" id="ubicacion" name="ubicacion" required>
+
+                <label for="fecha-inicio">Fecha de inicio:</label>
+                <input type="date" id="fecha-inicio" name="fecha-inicio" required>
+
+                <label for="fecha-fin">Fecha de finalizacion:</label>
+                <input type="date" id="fecha-fin" name="fecha-fin" required>
+
+                <label for="gasto-material">Total de gastos de material:</label>
+                <input type="text" id="gasto-material" name="gasto-material" required>
+
+                <label for="gasto-material">Total de gastos en trabajadores:</label>
+                <input type="text" id="gasto-material" name="gasto-material" required>
+
+                <div class="buttons">
+                    <button type="button" class="close" id="closeModal">Cancelar</button>
+                    <button type="submit">Enviar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
+    </section>
+    <section class="etiquetas">
+        <a href="" class="etiqueta">
+            <div class="imagen">
+                <img src="Obra1.png" alt="Imagen">
+            </div>
+            <div class="descripcion">
+                <h2 class="text-t">Nombre de la obra</h2>
+                <h2 class="text-et">Ubicacion</h2>
+                <h2 class="text-et">Fecha de inicio - fecha de fin</h2>
+                <h2 class="text-et">Total de gastos material:</h2>
+                <h2 class="text-et">Total gasto trabajadores:</h2>
+            </div>
+            <div class="text-final">
+                <h2 class="text-t">Semana</h2>
+                <h2 class="text-t">N</h2>
+            </div>
+        </a>
+    </section>
+    <section class="etiquetas">
+        <a href="" class="etiqueta">
+            <div class="imagen">
+                <img src="Obra1.png" alt="Imagen">
+            </div>
+            <div class="descripcion">
+                <h2 class="text-t">Nombre de la obra</h2>
+                <h2 class="text-et">Ubicacion</h2>
+                <h2 class="text-et">Fecha de inicio - fecha de fin</h2>
+                <h2 class="text-et">Total de gastos material:</h2>
+                <h2 class="text-et">Total gasto trabajadores:</h2>
+            </div>
+            <div class="text-final">
+                <h2 class="text-t">Semana</h2>
+                <h2 class="text-t">N</h2>
+            </div>
+        </a>
+    </section>
+    <section class="etiquetas">
+        <a href="" class="etiqueta">
+            <div class="imagen">
+                <img src="Obra1.png" alt="Imagen">
+            </div>
+            <div class="descripcion">
+                <h2 class="text-t">Nombre de la obra</h2>
+                <h2 class="text-et">Ubicacion</h2>
+                <h2 class="text-et">Fecha de inicio - fecha de fin</h2>
+                <h2 class="text-et">Total de gastos material:</h2>
+                <h2 class="text-et">Total gasto trabajadores:</h2>
+            </div>
+            <div class="text-final">
+                <h2 class="text-t">Semana</h2>
+                <h2 class="text-t">N</h2>
+            </div>
+        </a>
+    </section>
+    <section class="etiquetas">
+        <a href="" class="etiqueta">
+            <div class="imagen">
+                <img src="Obra1.png" alt="Imagen">
+            </div>
+            <div class="descripcion">
+                <h2 class="text-t">Nombre de la obra</h2>
+                <h2 class="text-et">Ubicacion</h2>
+                <h2 class="text-et">Fecha de inicio - fecha de fin</h2>
+                <h2 class="text-et">Total de gastos material:</h2>
+                <h2 class="text-et">Total gasto trabajadores:</h2>
+            </div>
+            <div class="text-final">
+                <h2 class="text-t">Semana</h2>
+                <h2 class="text-t">N</h2>
+            </div>
+        </a>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
