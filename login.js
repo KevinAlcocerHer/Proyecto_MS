@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Variables para almacenar credenciales demo
     const credencialesDemo = [
         { usuario: 'admin', contrasena: 'admin123' },
-        { usuario: 'cees1', contrasena: 'cees1' }
+        { usuario: 'cees', contrasena: 'cees' }
         
         
     ];
