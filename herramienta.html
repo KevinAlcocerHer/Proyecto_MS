@@ -301,22 +301,22 @@
     .home1{
         position: relative;
         height: 20px;
-        left: 270px;
-        width: calc(100% - 270px);
+        left: 250px;
+        width: calc(100% - 250px);
         background: var(--body-color);
         transition: var(--tran-05);
     }
 
     .sidebar.close ~ .home1{
-        left: 108px;
-        width: calc(100% - 108px);
+        left: 88px;
+        width: calc(100% - 88px);
     }
     
     .home{
         position: relative;
         height: 40px;
-        left: 270px;
-        width: calc(100% - 270px);
+        left: 250px;
+        width: calc(100% - 250px);
         transition: var(--tran-05);
     }
 
@@ -328,8 +328,8 @@
     }
     
     .sidebar.close ~ .home{
-        left: 108px;
-        width: calc(100% - 108px);
+        left: 88px;
+        width: calc(100% - 88px);
     }
     
     .home {
@@ -382,16 +382,16 @@
         flex-direction: column;
         align-items: center;
         position: relative;
-        left: 270px;
-        width: calc(100% - 270px);
+        left: 250px;
+        width: calc(100% - 250px);
         background: var(--body-color);
         transition: var(--tran-05);
         padding: 20px 0;
     }
 
     .sidebar.close ~ .tabla-container {
-        left: 108px;
-        width: calc(100% - 108px);
+        left: 88px;
+        width: calc(100% - 88px);
     }
 
     .tabla-header {
@@ -726,6 +726,7 @@
                     <th>Medida</th>
                     <th>Cantidad disponible</th>
                     <th>Estado</th>
+                    <th>Responsable registro</th>
                 </tr>
             </thead>
             <tbody id="herramienta-tbody">
@@ -853,6 +854,9 @@
                         <option value="reparacion">En reparación</option>
                         <option value="nuevo">Nuevo</option>
                     </select>
+                    
+                    <label for="responsable-registro">Responsable del registro:</label>
+                    <input type="text" id="responsable-registro" name="responsable-registro" placeholder="Nombre completo del responsable" required>
                     
                     <label for="descripcion-herramienta">Descripción adicional:</label>
                     <textarea id="descripcion-herramienta" name="descripcion-herramienta" rows="3" maxlength="200" placeholder="Describa características adicionales, marca, modelo, etc..."></textarea>
@@ -1053,6 +1057,7 @@
                     <td>16 oz</td>
                     <td>10</td>
                     <td>Buen estado</td>
+                    <td>Carlos Ramírez</td>
                 `;
                 tbodyHerramienta.appendChild(herramientaRow);
             }
@@ -1111,6 +1116,7 @@
                 const medida = document.getElementById("medida-herramienta").value;
                 const cantidad = document.getElementById("cantidad-herramienta").value;
                 const estado = document.getElementById("estado-herramienta").options[document.getElementById("estado-herramienta").selectedIndex].text;
+                const responsable = document.getElementById("responsable-registro").value;
                 
                 // Crear nueva fila
                 const newRow = document.createElement("tr");
@@ -1120,6 +1126,7 @@
                     <td>${medida}</td>
                     <td>${cantidad}</td>
                     <td>${estado}</td>
+                    <td>${responsable}</td>
                 `;
                 
                 // Agregar la nueva fila a la tabla
