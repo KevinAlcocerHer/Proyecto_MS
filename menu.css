@@ -27,6 +27,78 @@
   .sidebar.close .text {
     display: none;
   }
+  
+  /* Force sidebar to be in compact mode on mobile */
+  .sidebar {
+    width: 60px !important;
+    padding: 10px 5px !important;
+  }
+  
+  /* Always hide text on mobile for cleaner appearance */
+  .sidebar .text {
+    display: none !important;
+  }
+  
+  .sidebar .header-text {
+    display: none !important;
+  }
+  
+  /* Ensure logo is visible but compact */
+  .sidebar .img-text img {
+    width: 30px !important;
+    height: 30px !important;
+    display: block !important;
+    margin: 0 auto !important;
+  }
+  
+  /* Adjust main content to have more space */
+  .home, .etiquetas {
+    left: 70px !important;
+    width: calc(100% - 80px) !important;
+  }
+  
+  /* Make toggle button smaller and closer */
+  .sidebar header .toggle {
+    right: -12px !important;
+    height: 18px !important;
+    width: 18px !important;
+    font-size: 14px !important;
+  }
+  
+  /* Make icons more compact */
+  .sidebar li .icon {
+    min-width: 45px !important;
+  }
+  
+  /* Center icons in the mobile sidebar */
+  .sidebar li a {
+    justify-content: center !important;
+  }
+  
+  /* Make menu bar more compact */
+  .sidebar .menu-bar {
+    align-items: center !important;
+  }
+  
+  /* Make mode toggle more compact */
+  .menu-bar .mode {
+    width: 45px !important;
+  }
+  
+  .menu-bar .mode .toggle-switch {
+    min-width: 45px !important;
+  }
+  
+  .menu-bar .mode .moon-sun {
+    width: 45px !important;
+    justify-content: center !important;
+  }
+  
+  /* Adjust the etiquetas section to match the smaller sidebar */
+  .sidebar.close ~ .etiquetas {
+    left: 70px !important;
+    width: calc(100% - 80px) !important;
+  }
 }
 
 @media (max-width: 480px) {
@@ -40,8 +112,8 @@
   
   .etiquetas {
     padding: 10px;
-    left: 98px;
-    width: calc(100% - 108px);
+    left: 60px !important;
+    width: calc(100% - 70px) !important;
   }
   
   .descripcion .text-t {
@@ -54,12 +126,12 @@
   
   /* Ensure logo is visible on small screens */
   .sidebar {
-    width: 80px;
+    width: 50px !important;
     padding: 10px 5px; /* Reduce padding */
   }
   
   .sidebar.close {
-    width: 80px;
+    width: 50px !important;
   }
   
   .sidebar .imagen {
@@ -99,23 +171,34 @@
   
   .sidebar.close ~ .home,
   .sidebar.close ~ .etiquetas {
-    left: 90px;
-    width: calc(100% - 100px);
+    left: 60px !important;
+    width: calc(100% - 70px) !important;
   }
   
   /* Adjust the toggle button position */
   .sidebar header .toggle {
-    right: -15px;
-    height: 22px;
-    width: 22px;
-    font-size: 16px;
+    right: -10px !important;
+    height: 16px !important;
+    width: 16px !important;
+    font-size: 12px !important;
+  }
+  
+  .sidebar li .icon {
+    min-width: 40px !important;
+  }
+  
+  /* Make mode toggle even more compact */
+  .menu-bar .mode,
+  .menu-bar .mode .toggle-switch,
+  .menu-bar .mode .moon-sun {
+    width: 40px !important;
   }
 }
 
 @media (max-width: 360px) {
   .etiquetas {
-    left: 88px;
-    width: calc(100% - 98px);
+    left: 60px !important;
+    width: calc(100% - 70px) !important;
     padding: 5px;
   }
   
@@ -133,17 +216,17 @@
   
   /* Additional fixes for very small screens */
   .sidebar {
-    width: 70px;
+    width: 50px !important;
   }
   
   .sidebar.close {
-    width: 70px;
+    width: 50px !important;
   }
   
   .sidebar.close ~ .home,
   .sidebar.close ~ .etiquetas {
-    left: 80px;
-    width: calc(100% - 90px);
+    left: 60px !important;
+    width: calc(100% - 70px) !important;
   }
   
   /* Ensure logo visibility on smallest screens */
@@ -442,9 +525,6 @@ body.dark .switch::before {
   left: 138px;
   width: calc(100% - 138px);
 }
-
-/* Remaining CSS stays the same as before */
-/* ... */
 
 /* Estilos para submenús */
 .nav-link {
