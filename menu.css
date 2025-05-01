@@ -14,11 +14,18 @@
     padding: 15px;
   }
   
-  /* Adjusted sidebar icon */
+  /* Ensure logo visibility */
   .sidebar .img-text img {
     width: 35px;
     height: 35px;
     object-fit: contain;
+    display: block; /* Ensure it's visible */
+    opacity: 1; /* Make sure it's not transparent */
+  }
+  
+  /* Fix sidebar text in mobile */
+  .sidebar.close .text {
+    display: none;
   }
 }
 
@@ -45,40 +52,55 @@
     font-size: 0.9rem;
   }
   
-  /* Fixed sidebar and icon for mobile */
+  /* Ensure logo is visible on small screens */
   .sidebar {
     width: 80px;
+    padding: 10px 5px; /* Reduce padding */
   }
   
   .sidebar.close {
     width: 80px;
   }
   
-  .sidebar.close ~ .home,
-  .sidebar.close ~ .etiquetas {
-    left: 90px;
-    width: calc(100% - 100px);
+  .sidebar .imagen {
+    min-width: 40px; /* Reduce minimum width */
   }
   
-  /* This is the critical fix for the icon */
+  /* Critical fix for the logo */
   .sidebar .img-text {
     justify-content: center;
+    display: flex !important; /* Force display */
   }
   
   .sidebar .img-text img {
     width: 30px;
     height: 30px;
     object-fit: contain;
-    display: block;
+    display: block !important; /* Force display */
     margin: 0 auto;
+    opacity: 1 !important; /* Force visibility */
+    visibility: visible !important; /* Force visibility */
   }
   
-  /* Center the icon in the sidebar */
-  .sidebar .imagen {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
+  /* Hide text but show logo when sidebar is closed */
+  .sidebar.close .text {
+    display: none;
+  }
+  
+  .sidebar.close .img-text .header-text {
+    display: none;
+  }
+  
+  .sidebar.close .img-text img {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+  
+  .sidebar.close ~ .home,
+  .sidebar.close ~ .etiquetas {
+    left: 90px;
+    width: calc(100% - 100px);
   }
   
   /* Adjust the toggle button position */
@@ -122,6 +144,15 @@
   .sidebar.close ~ .etiquetas {
     left: 80px;
     width: calc(100% - 90px);
+  }
+  
+  /* Ensure logo visibility on smallest screens */
+  .sidebar .img-text img {
+    width: 30px;
+    height: 30px;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
   }
 }
 
@@ -227,6 +258,9 @@ body.dark {
   height: 40px;
   border-radius: 6px;
   object-fit: contain;
+  display: block; /* Ensure it's a block element */
+  opacity: 1; /* Ensure it's visible */
+  visibility: visible; /* Ensure it's visible */
 }
 
 .sidebar header .img-text {
@@ -408,6 +442,9 @@ body.dark .switch::before {
   left: 138px;
   width: calc(100% - 138px);
 }
+
+/* Remaining CSS stays the same as before */
+/* ... */
 
 /* Estilos para submenús */
 .nav-link {
