@@ -1,4 +1,4 @@
-*{
+* {
   font-family: sans-serif;
   margin: 0;
   padding: 0;
@@ -7,41 +7,94 @@
 
 @media (max-width: 768px) {
   html {
-      font-size: 14px;
+    font-size: 14px;
   }
 
   section {
-      padding: 15px;
+    padding: 15px;
+  }
+  
+  .sidebar .img-text img {
+    width: 35px; /* Slightly smaller on medium screens */
+  }
+  
+  .sidebar.close .img-text img {
+    width: 35px; /* Ensure consistency when sidebar is closed */
   }
 }
 
 @media (max-width: 480px) {
   html {
-      font-size: 12px;
+    font-size: 12px;
   }
 
   section {
-      padding: 10px;
+    padding: 10px;
   }
-}
-
-@media (max-width: 480px) {
+  
   .etiquetas {
-      padding: 10px;
-      left: 98px;
-      width: calc(100% - 108px);
+    padding: 10px;
+    left: 98px;
+    width: calc(100% - 108px);
   }
   
   .descripcion .text-t {
-      font-size: 1.1rem;
+    font-size: 1.1rem;
   }
   
   .descripcion .text-et {
-      font-size: 0.9rem;
+    font-size: 0.9rem;
+  }
+  
+  .sidebar {
+    width: 200px; /* Slightly smaller on mobile */
+  }
+  
+  .sidebar.close ~ .home,
+  .sidebar.close ~ .etiquetas {
+    left: 98px;
+    width: calc(100% - 108px);
+  }
+  
+  .sidebar .img-text img {
+    width: 30px; /* Even smaller on mobile screens */
+  }
+  
+  .sidebar.close .img-text img {
+    width: 30px;
+    margin: 0 auto; /* Center the image when sidebar is closed */
+  }
+  
+  /* Adjust the toggle button position */
+  .sidebar header .toggle {
+    right: -20px;
+    height: 20px;
+    width: 20px;
+    font-size: 16px;
   }
 }
 
-:root{
+@media (max-width: 360px) {
+  .etiquetas {
+    left: 88px;
+    width: calc(100% - 98px);
+    padding: 5px;
+  }
+  
+  .descripcion .text-t {
+    font-size: 1rem;
+  }
+  
+  .descripcion .text-et {
+    font-size: 0.8rem;
+  }
+  
+  .text-final .text-t:nth-child(2) {
+    font-size: 1.5rem;
+  }
+}
+
+:root {
   --body-color: #fff; 
   --sidebar-color: #D6CBBE; 
   --primary-color: #D4A373; 
@@ -57,24 +110,24 @@
   --tran-05: all 0.5s ease;
 }
 
-body{
+body {
   height: 100vh;
   background: var(--body-color);
   transition: var(--tran-02);
 }
 
-body.dark{
+body.dark {
   --body-color: #1e2731;
-    --sidebar-color:#161b22;
-  --primary-color:#3a3b3c;
+  --sidebar-color: #161b22;
+  --primary-color: #3a3b3c;
   --primary-color-light: #3a3b3c;
-  --toggle-color:#fff;
-  --text-color:#ccc;
+  --toggle-color: #fff;
+  --text-color: #ccc;
   --text-color-ticket: #ffffff;
   --text-color-ticket-mouse: #464040;
 }
 
-.sidebar{
+.sidebar {
   position: fixed;
   top: 0;
   left: 0;
@@ -87,11 +140,11 @@ body.dark{
   border-radius: 0 10px 10px 0;
 }
 
-.sidebar.close{
+.sidebar.close {
   width: 88px;
 }
 
-.sidebar .text{
+.sidebar .text {
   font-size: 15px;
   font-weight: 500;
   color: var(--text-color);
@@ -100,18 +153,18 @@ body.dark{
   opacity: 1;
 }
 
-.sidebar.close .text{
+.sidebar.close .text {
   opacity: 0;
 }
 
-.sidebar .imagen{
+.sidebar .imagen {
   min-width: 60px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.sidebar li{
+.sidebar li {
   height: 50px;
   margin-top: 10px;
   list-style: none;
@@ -119,7 +172,7 @@ body.dark{
   align-items: center;
 }
 
-.sidebar li .icon{
+.sidebar li .icon {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -128,7 +181,7 @@ body.dark{
 }
 
 .sidebar li .icon,
-.sidebar li .text{
+.sidebar li .text {
   color: var(--text-color);
   transition: var(--tran-02);
 }
@@ -137,30 +190,30 @@ body.dark{
   position: relative;
 }
 
-.sidebar .img-text img{
+.sidebar .img-text img {
   width: 40px;
   border-radius: 6px;
 }
 
-.sidebar header .img-text{
+.sidebar header .img-text {
   display: flex;
   align-items: center;
 }
 
-.sidebar .img-text .header-text{
+.sidebar .img-text .header-text {
   display: flex;
   flex-direction: column;
 }
 
-.header-text .name{
+.header-text .name {
   font-weight: 600;
 }
 
-.header-text .desc{
+.header-text .desc {
   margin-top: -2px;
 }
 
-.sidebar header .toggle{
+.sidebar header .toggle {
   position: absolute;
   top: 50%;
   right: -25px;
@@ -176,16 +229,16 @@ body.dark{
   font-size: 20px;
 }
 
-.slider.close header .toggle{
+.slider.close header .toggle {
   transform: translateY(-50%) rotate(180deg);
 }
 
-body.dark .slider header .toggle{
+body.dark .slider header .toggle {
   transform: rotate(180deg);
   color: var(--text-color);
 }
 
-.sidebar .menu{
+.sidebar .menu {
   margin-top: 30px;
 }
 
@@ -199,41 +252,41 @@ body.dark .slider header .toggle{
   transition: var(--tran-04);
 }
 
-.sidebar li a:hover{
+.sidebar li a:hover {
   background: var(--primary-color);
 }
 
 .sidebar li:hover a .icon,
-.sidebar li:hover a .text{
+.sidebar li:hover a .text {
   color: var(--sidebar-color);
 }
 
 body.dark .sidebar li:hover a .icon,
-body.dark .sidebar li:hover a .text{
+body.dark .sidebar li:hover a .text {
   color: var(--text-color);
 }
 
-.sidebar .menu-bar{
+.sidebar .menu-bar {
   height: calc(100% - 50px);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 
-.menu-bar .mode{
+.menu-bar .mode {
   position: relative;
   border-radius: 10px;
   background: var(--primary-color-light);
 }
 
-.menu-bar .mode .moon-sun{
+.menu-bar .mode .moon-sun {
   height: 50px;
   width: 60px;
   display: flex;
   align-items: center;
 }
 
-.menu-bar .mode i{
+.menu-bar .mode i {
   position: absolute;
   transition: var(--tran-03);
 }
@@ -246,11 +299,11 @@ body.dark .menu-bar .mode i.moon {
   opacity: 1;
 }
 
-.menu-bar .mode i.sun{
+.menu-bar .mode i.sun {
   opacity: 0;
 }
 
-.menu-bar .mode .toggle-switch{
+.menu-bar .mode .toggle-switch {
   border-radius: 10px;
   position: absolute;
   right: 0;
@@ -263,7 +316,7 @@ body.dark .menu-bar .mode i.moon {
   background: var(--primary-color-light);
 }
 
-.toggle-switch .switch{
+.toggle-switch .switch {
   border-radius: 25px;
   position: relative;
   height: 22px;
@@ -271,7 +324,7 @@ body.dark .menu-bar .mode i.moon {
   background: var(--toggle-color);
 }
 
-.switch::before{
+.switch::before {
   content: '';
   position: absolute;
   height: 15px;
@@ -287,11 +340,11 @@ body.dark .menu-bar .mode i.moon {
   justify-content: center;
 }
 
-body.dark .switch::before{
+body.dark .switch::before {
   left: 24px;
 }
 
-.home{
+.home {
   top: 50px;
   position: relative;
   text-align: center;
@@ -307,7 +360,7 @@ body.dark .switch::before{
   padding-bottom: 20px;
 }
 
-.home .text{
+.home .text {
   font-size: 30px;
   font-weight: 500;
   width: auto;
@@ -317,7 +370,7 @@ body.dark .switch::before{
   border-radius: 10px;
 }
 
-.sidebar.close ~ .home{
+.sidebar.close ~ .home {
   left: 138px;
   width: calc(100% - 138px);
 }
@@ -599,45 +652,45 @@ body.dark .submenu li a:hover .text {
 
 @media (max-width: 1024px) {
   .imagen {
-      width: 200px;
+    width: 200px;
   }
 }
 
 @media (max-width: 768px) {
   .etiqueta {
-      flex-direction: column;
-      height: auto;
+    flex-direction: column;
+    height: auto;
   }
   
   .etiquetas {
-      height: auto;
-      left: 138px;
-      width: calc(100% - 158px);
+    height: auto;
+    left: 138px;
+    width: calc(100% - 158px);
   }
   
   .imagen {
-      width: 100%;
-      height: 180px;
+    width: 100%;
+    height: 180px;
   }
   
   .descripcion {
-      width: 100%;
-      padding: 15px;
+    width: 100%;
+    padding: 15px;
   }
   
   .text-final {
-      width: 100%;
-      flex-direction: row;
-      justify-content: space-around;
-      align-items: center;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
   }
   
   .text-final .text-t:nth-child(2) {
-      margin: 0 15px 0 0;
+    margin: 0 15px 0 0;
   }
   
   .progreso {
-      width: 50%;
+    width: 50%;
   }
 }
 
@@ -841,19 +894,19 @@ body.dark .delete-btn:hover {
 /* Estilos para pantallas más pequeñas */
 @media (max-width: 768px) {
   .botones-container {
-      flex-direction: column;
-      width: 100%;
-      max-width: 200px;
+    flex-direction: column;
+    width: 100%;
+    max-width: 200px;
   }
   
   .botones-container button {
-      width: 100%;
+    width: 100%;
   }
   
   .modal-content,
   .delete-modal-content {
-      width: 95%;
-      padding: 15px;
+    width: 95%;
+    padding: 15px;
   }
 }
 
