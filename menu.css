@@ -14,12 +14,11 @@
     padding: 15px;
   }
   
+  /* Adjusted sidebar icon */
   .sidebar .img-text img {
-    width: 35px; /* Slightly smaller on medium screens */
-  }
-  
-  .sidebar.close .img-text img {
-    width: 35px; /* Ensure consistency when sidebar is closed */
+    width: 35px;
+    height: 35px;
+    object-fit: contain;
   }
 }
 
@@ -46,30 +45,47 @@
     font-size: 0.9rem;
   }
   
+  /* Fixed sidebar and icon for mobile */
   .sidebar {
-    width: 200px; /* Slightly smaller on mobile */
+    width: 80px;
+  }
+  
+  .sidebar.close {
+    width: 80px;
   }
   
   .sidebar.close ~ .home,
   .sidebar.close ~ .etiquetas {
-    left: 98px;
-    width: calc(100% - 108px);
+    left: 90px;
+    width: calc(100% - 100px);
+  }
+  
+  /* This is the critical fix for the icon */
+  .sidebar .img-text {
+    justify-content: center;
   }
   
   .sidebar .img-text img {
-    width: 30px; /* Even smaller on mobile screens */
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
   }
   
-  .sidebar.close .img-text img {
-    width: 30px;
-    margin: 0 auto; /* Center the image when sidebar is closed */
+  /* Center the icon in the sidebar */
+  .sidebar .imagen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
   }
   
   /* Adjust the toggle button position */
   .sidebar header .toggle {
-    right: -20px;
-    height: 20px;
-    width: 20px;
+    right: -15px;
+    height: 22px;
+    width: 22px;
     font-size: 16px;
   }
 }
@@ -91,6 +107,21 @@
   
   .text-final .text-t:nth-child(2) {
     font-size: 1.5rem;
+  }
+  
+  /* Additional fixes for very small screens */
+  .sidebar {
+    width: 70px;
+  }
+  
+  .sidebar.close {
+    width: 70px;
+  }
+  
+  .sidebar.close ~ .home,
+  .sidebar.close ~ .etiquetas {
+    left: 80px;
+    width: calc(100% - 90px);
   }
 }
 
@@ -190,9 +221,12 @@ body.dark {
   position: relative;
 }
 
+/* Important fix for the logo image */
 .sidebar .img-text img {
   width: 40px;
+  height: 40px;
   border-radius: 6px;
+  object-fit: contain;
 }
 
 .sidebar header .img-text {
