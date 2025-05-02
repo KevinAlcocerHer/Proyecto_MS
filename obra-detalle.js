@@ -10,197 +10,12 @@ document.addEventListener("DOMContentLoaded", function() {
     const toggleSwitch = document.querySelector(".toggle-switch");
     const modeText = document.querySelector(".mode-text");
 
+    // Asegurarse de que el modal comienza oculto
     modalEditar.style.display = "none";
 
-// Arreglar la visibilidad del botón de editar
-btnEditar.style.display = "flex";
+    // Arreglar la visibilidad del botón de editar
+    btnEditar.style.display = "flex";
 
-// Función mejorada para abrir el modal de edición
-btnEditar.addEventListener("click", () => {
-    cargarDatosFormularioEdicion();
-    modalEditar.style.display = "flex";
-    document.body.style.overflow = "hidden"; // Evitar scroll en el fondo
-});
-
-// Función mejorada para cerrar el modal
-cerrarModalEditar.addEventListener("click", () => {
-    modalEditar.style.display = "none";
-    document.body.style.overflow = "auto"; // Restaurar scroll
-});
-
-// Cerrar modal al hacer clic fuera con mejora para evitar cierres accidentales
-window.addEventListener("click", (event) => {
-    if (event.target === modalEditar) {
-        modalEditar.style.display = "none";
-        document.body.style.overflow = "auto"; // Restaurar scroll
-    }
-});
-
-// Reemplaza la función agregarItemEditable con esta versión mejorada
-function agregarItemEditable(listId, valor) {
-    const lista = document.getElementById(listId);
-    
-    const itemDiv = document.createElement("div");
-    itemDiv.className = "lista-editable-item";
-    
-    const input = document.createElement("input");
-    input.type = "text";
-    input.value = valor;
-    input.required = true;
-    
-    const deleteBtn = document.createElement("span");
-    deleteBtn.className = "eliminar-item";
-    deleteBtn.innerHTML = '<i class="bx bx-x"></i>';
-    deleteBtn.addEventListener("click", function() {
-        // No eliminar si es el único elemento
-        if (lista.children.length > 1) {
-            lista.removeChild(itemDiv);
-        } else {
-            input.value = ""; // Limpiar en vez de eliminar
-        }
-    });
-    
-    itemDiv.appendChild(input);
-    itemDiv.appendChild(deleteBtn);
-    lista.appendChild(itemDiv);
-    
-    // Dar foco al input que se acaba de crear
-    input.focus();
-}
-
-// Mejorar la validación del formulario antes de enviar
-formEditar.addEventListener("submit", (e) => {
-    e.preventDefault();
-    
-    // Validar que al menos un trabajador y una herramienta estén presentes
-    const trabajadoresInputs = document.querySelectorAll('#listaTrabajadoresEditable input');
-    const herramientasInputs = document.querySelectorAll('#listaHerramientasEditable input');
-    
-    let trabajadoresValidos = false;
-    let herramientasValidas = false;
-    
-    trabajadoresInputs.forEach(input => {
-        if (input.value.trim() !== "") {
-            trabajadoresValidos = true;
-        }
-    });
-    
-    herramientasInputs.forEach(input => {
-        if (input.value.trim() !== "") {
-            herramientasValidas = true;
-        }
-    });
-    
-    if (!trabajadoresValidos) {
-        alert("Debe agregar al menos un trabajador");
-        return;
-    }
-    
-    if (!herramientasValidas) {
-        alert("Debe agregar al menos una herramienta");
-        return;
-    }
-    
-    guardarCambiosObra();
-});
-
-// Mejorar la función guardarCambiosObra para asegurarse de que las fechas son válidas
-function guardarCambiosObra() {
-    if (!obraActual) return;
-    
-    // Obtener valores del formulario
-    const nombre = document.getElementById("editNombre").value;
-    const ubicacion = document.getElementById("editUbicacion").value;
-    const fechaInicio = document.getElementById("editFechaInicio").value;
-    const fechaFin = document.getElementById("editFechaFin").value;
-    
-    // Validar que la fecha de fin sea posterior a la fecha de inicio
-    if (new Date(fechaFin) < new Date(fechaInicio)) {
-        alert("La fecha de finalización debe ser posterior a la fecha de inicio");
-        return;
-    }
-    
-    const gastoMaterial = document.getElementById("editGastoMaterial").value;
-    const gastoTrabajadores = document.getElementById("editGastoTrabajadores").value;
-    
-    // Validar que los gastos sean números positivos
-    if (parseFloat(gastoMaterial) < 0 || parseFloat(gastoTrabajadores) < 0) {
-        alert("Los gastos no pueden ser negativos");
-        return;
-    }
-    
-    // Continuar con el resto de la función original...
-    // Actividad: Entrada de Material
-    const fechaEntrada = document.getElementById("editFechaEntrada").value;
-    const recibio = document.getElementById("editRecibio").value;
-    const cantidad = document.getElementById("editCantidad").value;
-    
-    // Actividad: Lista raya
-    const fechaCorte = document.getElementById("editFechaCorte").value;
-    const responsablePagar = document.getElementById("editResponsablePagar").value;
-    const pagado = document.getElementById("editPagado").value;
-    
-    // Actividad: Entrada Herramienta
-    const fechaEntrega = document.getElementById("editFechaEntrega").value;
-    const responsableEntrega = document.getElementById("editResponsableEntrega").value;
-    const responsableRecibe = document.getElementById("editResponsableRecibe").value;
-    
-    // Obtener trabajadores
-    const trabajadores = [];
-    const inputsTrabajadores = document.querySelectorAll('#listaTrabajadoresEditable input');
-    inputsTrabajadores.forEach(input => {
-        if (input.value.trim() !== "") {
-            trabajadores.push(input.value.trim());
-        }
-    });
-    
-    // Obtener herramientas
-    const herramientas = [];
-    const inputsHerramientas = document.querySelectorAll('#listaHerramientasEditable input');
-    inputsHerramientas.forEach(input => {
-        if (input.value.trim() !== "") {
-            herramientas.push(input.value.trim());
-        }
-    });
-    
-    // Actualizar objeto obra
-    obraActual.nombre = nombre;
-    obraActual.ubicacion = ubicacion;
-    obraActual.fechaInicio = fechaInicio;
-    obraActual.fechaFin = fechaFin;
-    obraActual.gastoMaterial = gastoMaterial;
-    obraActual.gastoTrabajadores = gastoTrabajadores;
-    
-    // Actividades
-    obraActual.fechaEntrada = fechaEntrada;
-    obraActual.recibio = recibio;
-    obraActual.cantidad = cantidad;
-    
-    obraActual.fechaCorte = fechaCorte;
-    obraActual.responsablePagar = responsablePagar;
-    obraActual.pagado = pagado;
-    
-    obraActual.fechaEntrega = fechaEntrega;
-    obraActual.responsableEntrega = responsableEntrega;
-    obraActual.responsableRecibe = responsableRecibe;
-    
-    // Listas
-    obraActual.trabajadores = trabajadores;
-    obraActual.herramientas = herramientas;
-    
-    // Guardar en localStorage
-    guardarObraActualizada();
-    
-    // Actualizar la vista
-    cargarDatosObra(obraActual.id);
-    
-    // Cerrar el modal
-    modalEditar.style.display = "none";
-    document.body.style.overflow = "auto"; // Restaurar scroll
-    
-    // Mostrar mensaje de éxito
-    alert("Obra actualizada correctamente");
-}
     // Variables globales
     let obraActual = null;
 
@@ -209,21 +24,24 @@ function guardarCambiosObra() {
         window.location.href = "obras.html"; // Regresar a la página principal
     });
 
-    // Manejar el botón de editar
+    // Función mejorada para abrir el modal de edición
     btnEditar.addEventListener("click", () => {
         cargarDatosFormularioEdicion();
         modalEditar.style.display = "flex";
+        document.body.style.overflow = "hidden"; // Evitar scroll en el fondo
     });
 
-    // Cerrar modal de edición
+    // Función mejorada para cerrar el modal
     cerrarModalEditar.addEventListener("click", () => {
         modalEditar.style.display = "none";
+        document.body.style.overflow = "auto"; // Restaurar scroll
     });
 
-    // Cerrar modal al hacer clic fuera
+    // Cerrar modal al hacer clic fuera con mejora para evitar cierres accidentales
     window.addEventListener("click", (event) => {
         if (event.target === modalEditar) {
             modalEditar.style.display = "none";
+            document.body.style.overflow = "auto"; // Restaurar scroll
         }
     });
 
@@ -231,16 +49,6 @@ function guardarCambiosObra() {
     formEditar.addEventListener("submit", (e) => {
         e.preventDefault();
         guardarCambiosObra();
-    });
-
-    // Agregar trabajador a la lista editable
-    document.getElementById("agregarTrabajador").addEventListener("click", () => {
-        agregarItemEditable("listaTrabajadoresEditable", "");
-    });
-
-    // Agregar herramienta a la lista editable
-    document.getElementById("agregarHerramienta").addEventListener("click", () => {
-        agregarItemEditable("listaHerramientasEditable", "");
     });
 
     // Tema oscuro y claro
@@ -281,7 +89,7 @@ function guardarCambiosObra() {
         window.location.href = "obras.html"; // Redirigir si no hay id
     }
 
-    // Función para cargar los datos de la obra
+    // Función para cargar los datos de la obra - versión corregida
     function cargarDatosObra(id) {
         // Obtener todas las obras del localStorage
         const obrasGuardadas = JSON.parse(localStorage.getItem("obras")) || [];
@@ -301,19 +109,19 @@ function guardarCambiosObra() {
                 document.getElementById("obraImagen").src = obra.imagen;
             }
             
-            document.getElementById("obraUbicacion").textContent = obra.ubicacion || "Ubicación no disponible";
-            
-            const fechaInicio = obra.fechaInicio ? new Date(obra.fechaInicio).toLocaleDateString() : "Fecha no disponible";
-            const fechaFin = obra.fechaFin ? new Date(obra.fechaFin).toLocaleDateString() : "Fecha no disponible";
-            document.getElementById("obraFechas").textContent = `${fechaInicio} - ${fechaFin}`;
-            
-            document.getElementById("obraGastoMaterial").textContent = `Total gastos material: $${obra.gastoMaterial || 0}`;
-            document.getElementById("obraGastoTrabajadores").textContent = `Total gastos trabajadores: $${obra.gastoTrabajadores || 0}`;
+            // Mostrar la información actualizada
+            document.getElementById("obraUbicacion").textContent = `Ubicación: ${obra.ubicacion || "Ubicación no disponible"}`;
+            document.getElementById("obraDuenoPredio").textContent = `Dueño del predio: ${obra.duenoPredio || "Dueño no especificado"}`;
+            document.getElementById("obraNumeroContrato").textContent = `Número de contrato: ${obra.numeroContrato || "No asignado"}`;
+            document.getElementById("obraPresupuesto").textContent = `Presupuesto: ${obra.presupuesto || "$0"}`;
+            document.getElementById("obraFechaInicio").textContent = obra.fechaInicio ? 
+                formatearFecha(obra.fechaInicio) : "Fecha no disponible";
             
             // Calcular progreso
             const hoy = new Date();
             const inicio = obra.fechaInicio ? new Date(obra.fechaInicio) : new Date();
-            const fin = obra.fechaFin ? new Date(obra.fechaFin) : new Date();
+            const fin = obra.fechaFin ? new Date(obra.fechaFin) : new Date(inicio);
+            fin.setMonth(fin.getMonth() + 3); // Si no hay fecha fin, asumimos 3 meses por defecto
             
             // Asegurarse de que las fechas son válidas
             if (isNaN(inicio.getTime()) || isNaN(fin.getTime())) {
@@ -342,15 +150,15 @@ function guardarCambiosObra() {
             }
             
             // Actividades (usar datos de la obra si existen, sino simulados)
-            document.getElementById("fechaEntrada").textContent = `Fecha de entrada: ${obra.fechaEntrada ? new Date(obra.fechaEntrada).toLocaleDateString() : fechaAleatoria()}`;
+            document.getElementById("fechaEntrada").textContent = `Fecha de entrada: ${obra.fechaEntrada ? formatearFecha(obra.fechaEntrada) : fechaAleatoria()}`;
             document.getElementById("recibio").textContent = `Recibió: ${obra.recibio || "Nombre no registrado"}`;
             document.getElementById("cantidad").textContent = `Cantidad: ${obra.cantidad || Math.floor(Math.random() * 100) + 1}`;
             
-            document.getElementById("fechaCorte").textContent = `Fecha de corte: ${obra.fechaCorte ? new Date(obra.fechaCorte).toLocaleDateString() : fechaAleatoria()}`;
+            document.getElementById("fechaCorte").textContent = `Fecha de corte: ${obra.fechaCorte ? formatearFecha(obra.fechaCorte) : fechaAleatoria()}`;
             document.getElementById("responsablePagar").textContent = `Responsable pagar: ${obra.responsablePagar || obra.responsable || "No asignado"}`;
             document.getElementById("pagado").textContent = `Pagado: ${obra.pagado || (Math.random() > 0.5 ? "Sí" : "No")}`;
             
-            document.getElementById("fechaEntrega").textContent = `Fecha de entrega: ${obra.fechaEntrega ? new Date(obra.fechaEntrega).toLocaleDateString() : fechaAleatoria()}`;
+            document.getElementById("fechaEntrega").textContent = `Fecha de entrega: ${obra.fechaEntrega ? formatearFecha(obra.fechaEntrega) : fechaAleatoria()}`;
             document.getElementById("responsableEntrega").textContent = `Responsable Entrega: ${obra.responsableEntrega || obra.responsable || "No asignado"}`;
             document.getElementById("responsableRecibe").textContent = `Responsable Recibe: ${obra.responsableRecibe || obra.recibio || "No asignado"}`;
             
@@ -383,158 +191,101 @@ function guardarCambiosObra() {
         }
     }
 
-    // Cargar datos en el formulario de edición
+    // Cargar datos en el formulario de edición - modificada para solo información general
     function cargarDatosFormularioEdicion() {
         if (!obraActual) return;
         
-        // Información general
-        document.getElementById("editNombre").value = obraActual.nombre || "";
-        document.getElementById("editUbicacion").value = obraActual.ubicacion || "";
-        document.getElementById("editFechaInicio").value = obraActual.fechaInicio || "";
-        document.getElementById("editFechaFin").value = obraActual.fechaFin || "";
-        document.getElementById("editGastoMaterial").value = obraActual.gastoMaterial || 0;
-        document.getElementById("editGastoTrabajadores").value = obraActual.gastoTrabajadores || 0;
-        
-        // Actividad: Entrada de Material
-        document.getElementById("editFechaEntrada").value = obraActual.fechaEntrada || "";
-        document.getElementById("editRecibio").value = obraActual.recibio || "";
-        document.getElementById("editCantidad").value = obraActual.cantidad || 0;
-        
-        // Actividad: Lista raya
-        document.getElementById("editFechaCorte").value = obraActual.fechaCorte || "";
-        document.getElementById("editResponsablePagar").value = obraActual.responsablePagar || "";
-        document.getElementById("editPagado").value = obraActual.pagado || "No";
-        
-        // Actividad: Entrada Herramienta
-        document.getElementById("editFechaEntrega").value = obraActual.fechaEntrega || "";
-        document.getElementById("editResponsableEntrega").value = obraActual.responsableEntrega || "";
-        document.getElementById("editResponsableRecibe").value = obraActual.responsableRecibe || "";
-        
-        // Trabajadores
-        const listaTrabajadoresEditable = document.getElementById("listaTrabajadoresEditable");
-        listaTrabajadoresEditable.innerHTML = "";
-        
-        if (obraActual.trabajadores && obraActual.trabajadores.length > 0) {
-            obraActual.trabajadores.forEach(trabajador => {
-                agregarItemEditable("listaTrabajadoresEditable", trabajador);
-            });
-        } else {
-            // Añadir al menos un campo vacío
-            agregarItemEditable("listaTrabajadoresEditable", "");
-        }
-        
-        // Herramientas
-        const listaHerramientasEditable = document.getElementById("listaHerramientasEditable");
-        listaHerramientasEditable.innerHTML = "";
-        
-        if (obraActual.herramientas && obraActual.herramientas.length > 0) {
-            obraActual.herramientas.forEach(herramienta => {
-                agregarItemEditable("listaHerramientasEditable", herramienta);
-            });
-        } else {
-            // Añadir al menos un campo vacío
-            agregarItemEditable("listaHerramientasEditable", "");
-        }
-    }
-
-    // Función para agregar un elemento a una lista editable
-    function agregarItemEditable(listId, valor) {
-        const lista = document.getElementById(listId);
-        
-        const itemDiv = document.createElement("div");
-        itemDiv.className = "lista-editable-item";
-        
-        const input = document.createElement("input");
-        input.type = "text";
-        input.value = valor;
-        input.required = true;
-        
-        const deleteBtn = document.createElement("span");
-        deleteBtn.className = "eliminar-item";
-        deleteBtn.innerHTML = '<i class="bx bx-x"></i>';
-        deleteBtn.addEventListener("click", function() {
-            // No eliminar si es el único elemento
-            if (lista.children.length > 1) {
-                lista.removeChild(itemDiv);
+        // Mostrar solo la sección de información general y ocultar las demás
+        const secciones = document.querySelectorAll('.seccion-form');
+        secciones.forEach((seccion, index) => {
+            if (index === 0) {
+                // Mostrar solo la primera sección (Información General)
+                seccion.style.display = 'block';
             } else {
-                input.value = ""; // Limpiar en vez de eliminar
+                // Ocultar las demás secciones
+                seccion.style.display = 'none';
             }
         });
         
-        itemDiv.appendChild(input);
-        itemDiv.appendChild(deleteBtn);
-        lista.appendChild(itemDiv);
+        // Información general - solo los campos que queremos mantener
+        document.getElementById("editNombre").value = obraActual.nombre || "";
+        document.getElementById("editUbicacion").value = obraActual.ubicacion || "";
+        
+        // Campos específicos de la etiqueta simplificada
+        if (document.getElementById("editDuenoPredio")) {
+            document.getElementById("editDuenoPredio").value = obraActual.duenoPredio || "";
+        }
+        if (document.getElementById("editNumeroContrato")) {
+            document.getElementById("editNumeroContrato").value = obraActual.numeroContrato || "";
+        }
+        if (document.getElementById("editPresupuesto")) {
+            document.getElementById("editPresupuesto").value = obraActual.presupuesto || "";
+        }
+        
+        document.getElementById("editFechaInicio").value = obraActual.fechaInicio || "";
+        
+        // Mantener estos campos para la funcionalidad interna, pero no los mostraremos en la interfaz principal
+        if (document.getElementById("editFechaFin")) {
+            document.getElementById("editFechaFin").value = obraActual.fechaFin || "";
+        }
+        if (document.getElementById("editGastoMaterial")) {
+            document.getElementById("editGastoMaterial").value = obraActual.gastoMaterial || 0;
+        }
+        if (document.getElementById("editGastoTrabajadores")) {
+            document.getElementById("editGastoTrabajadores").value = obraActual.gastoTrabajadores || 0;
+        }
     }
 
-    // Función para guardar los cambios de la obra
+    // Función para guardar los cambios de la obra - modificada para solo información general
     function guardarCambiosObra() {
         if (!obraActual) return;
         
-        // Obtener valores del formulario
+        // Obtener valores del formulario - solo los campos que queremos mantener
         const nombre = document.getElementById("editNombre").value;
         const ubicacion = document.getElementById("editUbicacion").value;
+        
+        // Capturar los nuevos campos específicos de la etiqueta simplificada
+        let duenoPredio = "";
+        let presupuesto = "";
+        
+        if (document.getElementById("editDuenoPredio")) {
+            duenoPredio = document.getElementById("editDuenoPredio").value;
+        }
+        if (document.getElementById("editNumeroContrato")) {
+            numeroContrato = document.getElementById("editNumeroContrato").value;
+        }
+        if (document.getElementById("editPresupuesto")) {
+            presupuesto = document.getElementById("editPresupuesto").value;
+        }
+        
         const fechaInicio = document.getElementById("editFechaInicio").value;
-        const fechaFin = document.getElementById("editFechaFin").value;
-        const gastoMaterial = document.getElementById("editGastoMaterial").value;
-        const gastoTrabajadores = document.getElementById("editGastoTrabajadores").value;
         
-        // Actividad: Entrada de Material
-        const fechaEntrada = document.getElementById("editFechaEntrada").value;
-        const recibio = document.getElementById("editRecibio").value;
-        const cantidad = document.getElementById("editCantidad").value;
+        // Validar que los campos no estén vacíos
+        if (!nombre.trim()) {
+            alert("El nombre de la obra es obligatorio");
+            return;
+        }
         
-        // Actividad: Lista raya
-        const fechaCorte = document.getElementById("editFechaCorte").value;
-        const responsablePagar = document.getElementById("editResponsablePagar").value;
-        const pagado = document.getElementById("editPagado").value;
+        if (!ubicacion.trim()) {
+            alert("La ubicación es obligatoria");
+            return;
+        }
         
-        // Actividad: Entrada Herramienta
-        const fechaEntrega = document.getElementById("editFechaEntrega").value;
-        const responsableEntrega = document.getElementById("editResponsableEntrega").value;
-        const responsableRecibe = document.getElementById("editResponsableRecibe").value;
+        if (!fechaInicio) {
+            alert("La fecha de inicio es obligatoria");
+            return;
+        }
         
-        // Obtener trabajadores
-        const trabajadores = [];
-        const inputsTrabajadores = document.querySelectorAll('#listaTrabajadoresEditable input');
-        inputsTrabajadores.forEach(input => {
-            if (input.value.trim() !== "") {
-                trabajadores.push(input.value.trim());
-            }
-        });
-        
-        // Obtener herramientas
-        const herramientas = [];
-        const inputsHerramientas = document.querySelectorAll('#listaHerramientasEditable input');
-        inputsHerramientas.forEach(input => {
-            if (input.value.trim() !== "") {
-                herramientas.push(input.value.trim());
-            }
-        });
-        
-        // Actualizar objeto obra
+        // Actualizar objeto obra - solo la información general
         obraActual.nombre = nombre;
         obraActual.ubicacion = ubicacion;
+        
+        // Actualizar los nuevos campos específicos de la etiqueta simplificada
+        if (duenoPredio) obraActual.duenoPredio = duenoPredio;
+        if (numeroContrato) obraActual.numeroContrato = numeroContrato;
+        if (presupuesto) obraActual.presupuesto = presupuesto;
+        
         obraActual.fechaInicio = fechaInicio;
-        obraActual.fechaFin = fechaFin;
-        obraActual.gastoMaterial = gastoMaterial;
-        obraActual.gastoTrabajadores = gastoTrabajadores;
-        
-        // Actividades
-        obraActual.fechaEntrada = fechaEntrada;
-        obraActual.recibio = recibio;
-        obraActual.cantidad = cantidad;
-        
-        obraActual.fechaCorte = fechaCorte;
-        obraActual.responsablePagar = responsablePagar;
-        obraActual.pagado = pagado;
-        
-        obraActual.fechaEntrega = fechaEntrega;
-        obraActual.responsableEntrega = responsableEntrega;
-        obraActual.responsableRecibe = responsableRecibe;
-        
-        // Listas
-        obraActual.trabajadores = trabajadores;
-        obraActual.herramientas = herramientas;
         
         // Guardar en localStorage
         guardarObraActualizada();
@@ -544,9 +295,10 @@ function guardarCambiosObra() {
         
         // Cerrar el modal
         modalEditar.style.display = "none";
+        document.body.style.overflow = "auto"; // Restaurar scroll
         
         // Mostrar mensaje de éxito
-        alert("Obra actualizada correctamente");
+        alert("Información general actualizada correctamente");
     }
 
     // Función para guardar la obra actualizada en localStorage
@@ -566,6 +318,16 @@ function guardarCambiosObra() {
         }
     }
 
+    // Función auxiliar para formatear fechas
+    function formatearFecha(fechaStr) {
+        if (!fechaStr) return "No definido";
+        
+        const fecha = new Date(fechaStr);
+        if (isNaN(fecha)) return "Fecha inválida";
+        
+        return fecha.toLocaleDateString();
+    }
+
     // Función auxiliar para generar una fecha aleatoria en el último año
     function fechaAleatoria() {
         const hoy = new Date();
@@ -575,3 +337,29 @@ function guardarCambiosObra() {
         return fecha.toLocaleDateString();
     }
 });
+
+
+// Código para integrar con obra-detalle.js
+// Colocar este código justo después del cierre de DOMContentLoaded
+
+// Agregar la referencia global a obraActual
+window.obraActual = null;
+
+// Modificar la función cargarDatosObra para asignar obraActual a window.obraActual
+function cargarDatosObra(id) {
+    // Obtener todas las obras del localStorage
+    const obrasGuardadas = JSON.parse(localStorage.getItem("obras")) || [];
+    
+    // Buscar la obra por su ID
+    const obra = obrasGuardadas.find(o => o.id === id);
+    
+    if (obra) {
+        // Guardar la obra actual en variable global
+        obraActual = obra;
+        window.obraActual = obra; // Añadir esta línea para hacer accesible globalmente
+        
+        // Resto del código de cargarDatosObra...
+    }
+}
+
+
