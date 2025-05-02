@@ -74,6 +74,37 @@
             </div>
         </div>
 
+        <div class="proyecto-informacion-container">
+            <h2 class="seccion-titulo">Información del Proyecto</h2>
+            
+            <div class="informacion-proyecto-cuerpo">
+                <div class="proyecto-detalles">
+                    <h3>Estado Financiero</h3>
+                    <div class="estado-financiero">
+                        <div class="detalle-financiero">
+                            <p>Presupuesto asignado: <span id="financieroPresupuesto">$0</span></p>
+                            <p>Gasto en materiales: <span id="financieroMateriales">$0</span></p>
+                            <p>Gasto en trabajadores: <span id="financieroTrabajadores">$0</span></p>
+                            <p>Total gastado: <span id="financieroTotalGastado">$0</span></p>
+                            <p>Presupuesto restante: <span id="financieroRestante">$0</span></p>
+                        </div>
+                        <div class="grafico-financiero">
+                            <div class="barra-presupuesto">
+                                <div id="barraGastado" class="barra-gastado" style="width: 0%"></div>
+                            </div>
+                            <p>Porcentaje utilizado: <span id="financieroPorcentaje">0%</span></p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="proyecto-acciones">
+                    <button id="btnDescargarPDF" class="btn-descargar-pdf">
+                        <i class='bx bx-download'></i> Descargar Informe PDF
+                    </button>
+                </div>
+            </div>
+        </div>
+
             <!-- Botón para agregar actividad - NUEVA POSICIÓN -->
             <div class="agregar-actividad-container">
                 <button id="btnAgregarActividad" class="btn-agregar-actividad">
@@ -138,46 +169,6 @@
                             <li>Herramienta 4</li>
                         </ul>
                     </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="proyecto-informacion-container">
-            <h2 class="seccion-titulo">Información del Proyecto</h2>
-            
-            <div class="informacion-proyecto-cuerpo">
-                <div class="proyecto-resumen">
-                    <h3>Resumen Ejecutivo</h3>
-                    <p id="proyectoResumen">
-                        Este proyecto consiste en la construcción de <span id="proyectoTipo">una edificación</span> ubicada en <span id="proyectoUbicacion">la ubicación</span>. 
-                        El contrato <span id="proyectoNumeroContrato">número</span> tiene un presupuesto asignado de <span id="proyectoPresupuesto">$0</span>.
-                        El proyecto comenzó el <span id="proyectoFechaInicio">fecha</span> y actualmente se encuentra en la semana <span id="proyectoSemana">0</span> de ejecución.
-                    </p>
-                </div>
-                
-                <div class="proyecto-detalles">
-                    <h3>Estado Financiero</h3>
-                    <div class="estado-financiero">
-                        <div class="detalle-financiero">
-                            <p>Presupuesto asignado: <span id="financieroPresupuesto">$0</span></p>
-                            <p>Gasto en materiales: <span id="financieroMateriales">$0</span></p>
-                            <p>Gasto en trabajadores: <span id="financieroTrabajadores">$0</span></p>
-                            <p>Total gastado: <span id="financieroTotalGastado">$0</span></p>
-                            <p>Presupuesto restante: <span id="financieroRestante">$0</span></p>
-                        </div>
-                        <div class="grafico-financiero">
-                            <div class="barra-presupuesto">
-                                <div id="barraGastado" class="barra-gastado" style="width: 0%"></div>
-                            </div>
-                            <p>Porcentaje utilizado: <span id="financieroPorcentaje">0%</span></p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="proyecto-acciones">
-                    <button id="btnDescargarPDF" class="btn-descargar-pdf">
-                        <i class='bx bx-download'></i> Descargar Informe PDF
-                    </button>
                 </div>
             </div>
         </div>
