@@ -226,12 +226,7 @@ document.addEventListener("DOMContentLoaded", function() {
             
             // Validar fechas antes de guardar
             const fechaInicio = document.getElementById('fecha-inicio').value;
-            const fechaFin = document.getElementById('fecha-fin').value;
-            
-            if (new Date(fechaFin) < new Date(fechaInicio)) {
-                alert("La fecha de finalización debe ser posterior a la fecha de inicio");
-                return;
-            }
+          
             
             // Crear un objeto con los datos de la obra
             const nuevaObra = {
@@ -239,11 +234,12 @@ document.addEventListener("DOMContentLoaded", function() {
                 nombre: document.getElementById('name').value,
                 ubicacion: document.getElementById('ubicacion').value,
                 fechaInicio: fechaInicio,
-                fechaFin: fechaFin,
+                fechaFin: null,
                 gastoMaterial: document.getElementById('gasto-material').value,
                 gastoTrabajadores: document.getElementById('gasto-trabajadores').value,
                 // Datos simulados para demostración
-                imagen: 'Obra1.png', // Por defecto usamos la misma imagen
+                imagen: 'Obra1.png',
+                 // Por defecto usamos la misma imagen
                 recibio: 'Usuario Demo',
                 responsable: 'Administrador',
                 // Simulación de trabajadores
