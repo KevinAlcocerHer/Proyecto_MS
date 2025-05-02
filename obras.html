@@ -3,157 +3,377 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Constructora: Tecno Build</title>
-    <link rel="stylesheet" href="menu.css">
+    <title>Detalle de Obra | TecnoBuild</title>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="icon" href="icon.png">
+    <link rel="stylesheet" href="detalle-style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
 
 <body>
-    <nav class="sidebar close">
-        <header>
-            <div class="img-text">
-                <span class="imagen">
-                    <img src="logo.png" alt="logo">
-                </span>
-
-                <div class="text header-text">
-                    <span class="name">TecnoBuild</span>
-                    <span class="desc">Construccion inteligente</span>
-                </div>
+    <header class="obra-header">
+        <button id="btnRegresar" class="btn-regresar">
+            <i class='bx bx-arrow-back'></i> Regresar
+        </button>
+        <button id="btnEditar" class="btn-editar">
+            <i class='bx bx-edit'></i> Editar Obra
+        </button>
+        <button id="btnFinalizar" class="btn-finalizar">
+            <i class='bx bx-check-circle'></i> Finalizar Obra
+        </button>
+        <div class="toggle-mode">
+            <div class="moon-sun">
+                <i class='bx bx-moon icon moon'></i>
+                <i class='bx bx-sun icon sun'></i>
             </div>
-            <i class='bx bx-menu toggle' ></i>
-        </header>
+            <span class="mode-text">Modo oscuro</span>
+            <div class="toggle-switch">
+                <span class="switch"></span>
+            </div>
+        </div>
+    </header>
+
+    <div class="contenedor">
+        <h1 id="obraTitulo" class="obra-titulo">Obra: <span>Nombre de Obra</span></h1>
         
-        <div class="menu-bar">
-            <div class="menu">
-                <ul class="menu-links">
-                    <li class="nav-link">
-                        <a href="obras.html">
-                            <i class='bx bx-home icon' ></i>
-                            <span class="text nav-text">Obras</span>
-                        </a>
-                    </li>
-                    <li class="nav-link">
-                        <a href="herramienta.html">
-                            <i class='bx bx-wrench icon' ></i>
-                            <span class="text nav-text">Herramienta</span>
-                        </a>
-                    </li>
-                    <li class="nav-link">
-                        <a href="material.html">
-                            <i class='bx bx-box icon' ></i>
-                            <span class="text nav-text">Material</span>
-                        </a>
-                    </li>
-                    <li class="nav-link">
-                        <a href="empleado.html">
-                            <i class='bx bx-user icon' ></i>
-                            <span class="text nav-text">Empleado</span>
-                        </a>
-                    </li>
-                </ul>
+        <div class="obra-info-principal">
+            <div class="imagen-obra">
+                <img id="obraImagen" src="Obra1.png" alt="Imagen de la obra">
             </div>
-            <div class="bottom-content">
-                <li class="">
-                    <a href="#">
-                        <i class='bx bx-log-out icon' ></i>
-                        <span class="text nav-text">Salir</span>
-                    </a>
-                </li>
-
-                <li class="mode">
-                    <div class="moon-sun">
-                        <i class='bx bx-moon icon moon' ></i>
-                        <i class='bx bx-sun icon sun' ></i>
+            <div class="datos-principales">
+                <div class="dato">
+                    <i class='bx bx-map-pin'></i>
+                    <p id="obraUbicacion">Ubicación</p>
+                </div>
+                <div class="dato">
+                    <i class='bx bx-user'></i>
+                    <p id="obraDuenoPredio">Dueño del predio</p>
+                </div>
+                <div class="dato">
+                    <i class='bx bx-file'></i>
+                    <p id="obraNumeroContrato">Número de contrato</p>
+                </div>
+                <div class="dato">
+                    <i class='bx bx-dollar-circle'></i>
+                    <p id="obraPresupuesto">Presupuesto:</p>
+                </div>
+                <div class="dato">
+                    <i class='bx bx-calendar'></i>
+                    <p id="obraFechaInicio">Fecha de inicio</p>
+                </div>
+                <div class="progreso-container">
+                    <div class="progreso-info">
+                        <span>Semana</span>
+                        <span id="obraSemana" class="semana-numero">0</span>
                     </div>
-                    <span class="mode-text text">Modo oscuro</span>
-
-                    <div class="toggle-switch">
-                        <span class="switch"></span>
+                    <div class="progreso">
+                        <div id="obraProgreso" class="barra-progreso" style="width: 0%"></div>
                     </div>
-                </li>
-            </div>
-        </div>
-    </nav>
-
-    <section class="home">
-        <div class="text">Obras</div>
-        <div class="botones-container">
-            <button id="openModal">Agregar obra</button>
-            <button id="deleteObra" class="delete-btn">Eliminar obra</button>
-        </div>
-    </section>
-    
-    <!-- Esta sección se eliminará automáticamente cuando haya obras reales guardadas -->
-    <section class="etiquetas">
-        <a href="#" class="etiqueta">
-            <div class="imagen">
-                <img src="Obra1.png" alt="Imagen de ejemplo">
-            </div>
-            <div class="descripcion">
-                <h2 class="text-t">Ejemplo: Nueva obra</h2>
-                <h2 class="text-et"><i class='bx bx-map-pin'></i> Ubicación de ejemplo</h2>
-                <h2 class="text-et"><i class='bx bx-calendar'></i> 01/01/2025 - 01/06/2025</h2>
-                <h2 class="text-et"><i class='bx bx-dollar-circle'></i> Total gastos material: $10000</h2>
-                <h2 class="text-et"><i class='bx bx-user'></i> Total gastos trabajadores: $5000</h2>
-            </div>
-            <div class="text-final">
-                <h2 class="text-t">Semana</h2>
-                <h2 class="text-t">3</h2>
-                <div class="progreso">
-                    <div class="barra-progreso" style="width: 45%"></div>
                 </div>
             </div>
-        </a>
-    </section>
-
-    <!-- Modal para agregar una obra -->
-    <div class="modal" id="formModal">
-        <div class="modal-content">
-            <h2>Agregar Obra</h2>
-            <form>
-                <label for="name">Nombre de la obra:</label>
-                <input type="text" id="name" name="name" required>
-
-                <label for="ubicacion">Ubicación:</label>
-                <input type="text" id="ubicacion" name="ubicacion" required>
-
-                <label for="fecha-inicio">Fecha de inicio:</label>
-                <input type="date" id="fecha-inicio" name="fecha-inicio" required>
-
-                <label for="fecha-fin">Fecha de finalización:</label>
-                <input type="date" id="fecha-fin" name="fecha-fin" required>
-
-                <label for="gasto-material">Total de gastos de material:</label>
-                <input type="number" id="gasto-material" name="gasto-material" required>
-
-                <label for="gasto-trabajadores">Total de gastos en trabajadores:</label>
-                <input type="number" id="gasto-trabajadores" name="gasto-trabajadores" required>
-
-                <div class="buttons">
-                    <button type="button" class="close" id="closeModal">Cancelar</button>
-                    <button type="submit">Guardar</button>
-                </div>
-            </form>
         </div>
-    </div>
 
-    <!-- Modal para eliminar obra -->
-    <div class="delete-modal" id="deleteModal">
-        <div class="delete-modal-content">
-            <h2>Eliminar Obra</h2>
-            <p>Selecciona la obra que deseas eliminar:</p>
-            <select id="obraSelect">
-                <!-- Las opciones se cargarán dinámicamente -->
-            </select>
-            <div class="delete-modal-buttons">
-                <button type="button" class="close" id="cancelDelete">Cancelar</button>
-                <button type="button" class="confirm-delete-btn" id="confirmDelete">Eliminar</button>
+            <!-- Botón para agregar actividad - NUEVA POSICIÓN -->
+            <div class="agregar-actividad-container">
+                <button id="btnAgregarActividad" class="btn-agregar-actividad">
+                    <i class='bx bx-plus-circle'></i> Agregar Actividad
+                </button>
+            </div>
+
+
+        <!-- Sección de Actividades -->
+        <div class="actividades-container">
+            <!-- Primera actividad: Entrada de Material -->
+            <div class="actividad-tarjeta">
+                <div class="actividad-header">
+                    <h2>Actividad: Entrada de Material</h2>
+                    <p id="fechaEntrada">Fecha de entrada: --/--/----</p>
+                    <p id="recibio">Recibió: "nombre quien recibe"</p>
+                    <p id="cantidad">Cantidad: N</p>
+                </div>
+            </div>
+
+            <!-- Segunda actividad: Lista raya y Trabajadores -->
+            <div class="actividad-tarjeta doble">
+                <div class="actividad-izquierda">
+                    <div class="actividad-header">
+                        <h2>Actividad: Lista raya</h2>
+                        <p id="fechaCorte">Fecha de corte: --/--/----</p>
+                        <p id="responsablePagar">Responsable pagar: --</p>
+                        <p id="pagado">Pagado: --</p>
+                    </div>
+                </div>
+                <div class="actividad-derecha">
+                    <div class="actividad-lista">
+                        <h2>Trabajadores</h2>
+                        <ul id="listaTrabajadores">
+                            <li>Trabajador 1</li>
+                            <li>Trabajador 2</li>
+                            <li>Trabajador 3</li>
+                            <li>Trabajador 4</li>
+                            <li>Trabajador 5</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tercera actividad: Entrada Herramienta -->
+            <div class="actividad-tarjeta doble">
+                <div class="actividad-izquierda">
+                    <div class="actividad-header">
+                        <h2>Actividad: Entrada Herramienta</h2>
+                        <p id="fechaEntrega">Fecha de entrega: --/--/----</p>
+                        <p id="responsableEntrega">Responsable Entrega: --</p>
+                        <p id="responsableRecibe">Responsable Recibe: --</p>
+                    </div>
+                </div>
+                <div class="actividad-derecha">
+                    <div class="actividad-lista">
+                        <h2>Herramientas</h2>
+                        <ul id="listaHerramientas">
+                            <li>Herramienta 1</li>
+                            <li>Herramienta 2</li>
+                            <li>Herramienta 3</li>
+                            <li>Herramienta 4</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
+
+        <div class="proyecto-informacion-container">
+            <h2 class="seccion-titulo">Información del Proyecto</h2>
+            
+            <div class="informacion-proyecto-cuerpo">
+                <div class="proyecto-resumen">
+                    <h3>Resumen Ejecutivo</h3>
+                    <p id="proyectoResumen">
+                        Este proyecto consiste en la construcción de <span id="proyectoTipo">una edificación</span> ubicada en <span id="proyectoUbicacion">la ubicación</span>. 
+                        El contrato <span id="proyectoNumeroContrato">número</span> tiene un presupuesto asignado de <span id="proyectoPresupuesto">$0</span>.
+                        El proyecto comenzó el <span id="proyectoFechaInicio">fecha</span> y actualmente se encuentra en la semana <span id="proyectoSemana">0</span> de ejecución.
+                    </p>
+                </div>
+                
+                <div class="proyecto-detalles">
+                    <h3>Estado Financiero</h3>
+                    <div class="estado-financiero">
+                        <div class="detalle-financiero">
+                            <p>Presupuesto asignado: <span id="financieroPresupuesto">$0</span></p>
+                            <p>Gasto en materiales: <span id="financieroMateriales">$0</span></p>
+                            <p>Gasto en trabajadores: <span id="financieroTrabajadores">$0</span></p>
+                            <p>Total gastado: <span id="financieroTotalGastado">$0</span></p>
+                            <p>Presupuesto restante: <span id="financieroRestante">$0</span></p>
+                        </div>
+                        <div class="grafico-financiero">
+                            <div class="barra-presupuesto">
+                                <div id="barraGastado" class="barra-gastado" style="width: 0%"></div>
+                            </div>
+                            <p>Porcentaje utilizado: <span id="financieroPorcentaje">0%</span></p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="proyecto-acciones">
+                    <button id="btnDescargarPDF" class="btn-descargar-pdf">
+                        <i class='bx bx-download'></i> Descargar Informe PDF
+                    </button>
+                </div>
+            </div>
+        </div>
+
     </div>
 
-    <script src="obras.js"></script>
+    <!-- Modal para editar la obra - Modificado para solo información general -->
+<div class="modal-editar" id="modalEditar">
+    <div class="modal-content-editar">
+        <h2>Editar Información General</h2>
+        <form id="formEditar">
+            <div class="seccion-form">
+                <h3>Información General</h3>
+                <label for="editNombre">Nombre de la obra:</label>
+                <input type="text" id="editNombre" name="editNombre" required>
+            
+                <label for="editUbicacion">Ubicación:</label>
+                <input type="text" id="editUbicacion" name="editUbicacion" required>
+            
+                <label for="editDuenoPredio">Dueño del predio:</label>
+                <input type="text" id="editDuenoPredio" name="editDuenoPredio" required>
+
+                <label for="editNumeroContrato">Número de contrato:</label>
+                <input type="text" id="editNumeroContrato" name="editNumeroContrato">
+            
+                <label for="editPresupuesto">Presupuesto:</label>
+                <input type="text" id="editPresupuesto" name="editPresupuesto" required>
+            
+                <label for="editFechaInicio">Fecha de inicio:</label>
+                <input type="date" id="editFechaInicio" name="editFechaInicio" required>
+                
+                <!-- Campos que mantenemos para funcionalidad interna pero ocultamos -->
+                <div style="display: none;">
+                    <label for="editFechaFin">Fecha de finalización:</label>
+                    <input type="date" id="editFechaFin" name="editFechaFin">
+            
+                    <label for="editGastoMaterial">Total de gastos de material:</label>
+                    <input type="number" id="editGastoMaterial" name="editGastoMaterial" value="0">
+            
+                    <label for="editGastoTrabajadores">Total de gastos en trabajadores:</label>
+                    <input type="number" id="editGastoTrabajadores" name="editGastoTrabajadores" value="0">
+                </div>
+            </div>
+
+            <!-- El resto de las secciones permanecen en el HTML pero se ocultan con JavaScript -->
+            <div class="seccion-form" style="display: none;">
+                <h3>Actividad: Entrada de Material</h3>
+                <!-- ... resto del contenido ... -->
+            </div>
+
+            <div class="seccion-form" style="display: none;">
+                <h3>Actividad: Lista raya</h3>
+                <!-- ... resto del contenido ... -->
+            </div>
+
+            <div class="seccion-form" style="display: none;">
+                <h3>Trabajadores</h3>
+                <!-- ... resto del contenido ... -->
+            </div>
+
+            <div class="seccion-form" style="display: none;">
+                <h3>Actividad: Entrada Herramienta</h3>
+                <!-- ... resto del contenido ... -->
+            </div>
+
+            <div class="seccion-form" style="display: none;">
+                <h3>Herramientas</h3>
+                <!-- ... resto del contenido ... -->
+            </div>
+
+            <div class="buttons">
+                <button type="button" class="close" id="cerrarModalEditar">Cancelar</button>
+                <button type="submit">Guardar Cambios</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<!-- Modal para agregar actividad -->
+<div class="modal-agregar-actividad" id="modalAgregarActividad">
+    <div class="modal-content-agregar">
+        
+        <!-- Selector de tipo de actividad -->
+        <div class="seleccion-tipo-actividad" id="seleccionTipoActividad">
+            <h3>Seleccione el tipo de actividad</h3>
+            <div class="tipos-actividad">
+                <div class="tipo-actividad" data-tipo="material">
+                    <i class='bx bx-package'></i>
+                    <span>Entrada de Material</span>
+                </div>
+                <div class="tipo-actividad" data-tipo="listaRaya">
+                    <i class='bx bx-list-check'></i>
+                    <span>Lista Raya</span>
+                </div>
+                <div class="tipo-actividad" data-tipo="herramienta">
+                    <i class='bx bx-wrench'></i>
+                    <span>Entrada Herramienta</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Formulario para Entrada de Material -->
+        <!-- Modificaciones a los formularios dentro del modal de agregar actividad -->
+
+<!-- Formulario para Entrada de Material con campo de gasto -->
+<div class="formulario-actividad" id="formMaterial" style="display: none;">
+    <h3>Actividad: Entrada de Material</h3>
+    <form id="formAgregarMaterial">
+        <label for="nuevoFechaEntrada">Fecha de entrada:</label>
+        <input type="date" id="nuevoFechaEntrada" name="nuevoFechaEntrada" required>
+        
+        <label for="nuevoRecibio">Recibió:</label>
+        <input type="text" id="nuevoRecibio" name="nuevoRecibio" required>
+        
+        <label for="nuevoCantidad">Cantidad:</label>
+        <input type="number" id="nuevoCantidad" name="nuevoCantidad" required>
+        
+        <label for="nuevoTipoMaterial">Tipo de Material:</label>
+        <input type="text" id="nuevoTipoMaterial" name="nuevoTipoMaterial" required>
+        
+        <label for="nuevoGastoMaterial">Gasto en Material ($):</label>
+        <input type="number" id="nuevoGastoMaterial" name="nuevoGastoMaterial" step="0.01" required placeholder="Ingrese la cantidad gastada">
+        
+        <div class="buttons">
+            <button type="button" class="close" id="cerrarFormMaterial">Cancelar</button>
+            <button type="submit">Guardar Actividad</button>
+        </div>
+    </form>
+</div>
+
+<!-- Formulario para Lista Raya con campo de gasto -->
+<div class="formulario-actividad" id="formListaRaya" style="display: none;">
+    <h3>Actividad: Lista Raya</h3>
+    <form id="formAgregarListaRaya">
+        <label for="nuevoFechaCorte">Fecha de corte:</label>
+        <input type="date" id="nuevoFechaCorte" name="nuevoFechaCorte" required>
+        
+        <label for="nuevoResponsablePagar">Responsable pagar:</label>
+        <input type="text" id="nuevoResponsablePagar" name="nuevoResponsablePagar" required>
+        
+        <label for="nuevoPagado">Pagado:</label>
+        <select id="nuevoPagado" name="nuevoPagado" required>
+            <option value="Sí">Sí</option>
+            <option value="No">No</option>
+        </select>
+        
+        <label for="nuevoGastoTrabajadores">Gasto en Trabajadores ($):</label>
+        <input type="number" id="nuevoGastoTrabajadores" name="nuevoGastoTrabajadores" step="0.01" required placeholder="Ingrese la cantidad gastada">
+        
+        <h4>Trabajadores</h4>
+        <div id="nuevoListaTrabajadores" class="lista-editable">
+            <!-- Se añadirán dinámicamente -->
+        </div>
+        <span class="agregar-item" id="nuevoAgregarTrabajador">+ Agregar trabajador</span>
+        
+        <div class="buttons">
+            <button type="button" class="close" id="cerrarFormListaRaya">Cancelar</button>
+            <button type="submit">Guardar Actividad</button>
+        </div>
+    </form>
+</div>
+
+<!-- Formulario para Entrada Herramienta con campo de gasto -->
+<div class="formulario-actividad" id="formHerramienta" style="display: none;">
+    <h3>Actividad: Entrada Herramienta</h3>
+    <form id="formAgregarHerramienta">
+        <label for="nuevoFechaEntrega">Fecha de entrega:</label>
+        <input type="date" id="nuevoFechaEntrega" name="nuevoFechaEntrega" required>
+        
+        <label for="nuevoResponsableEntrega">Responsable Entrega:</label>
+        <input type="text" id="nuevoResponsableEntrega" name="nuevoResponsableEntrega" required>
+        
+        <label for="nuevoResponsableRecibe">Responsable Recibe:</label>
+        <input type="text" id="nuevoResponsableRecibe" name="nuevoResponsableRecibe" required>
+        
+        <label for="nuevoGastoHerramientas">Gasto en Herramientas ($):</label>
+        <input type="number" id="nuevoGastoHerramientas" name="nuevoGastoHerramientas" step="0.01" required placeholder="Ingrese la cantidad gastada">
+        
+        <h4>Herramientas</h4>
+        <div id="nuevoListaHerramientas" class="lista-editable">
+            <!-- Se añadirán dinámicamente -->
+        </div>
+        <span class="agregar-item" id="nuevoAgregarHerramienta">+ Agregar herramienta</span>
+        
+        <div class="buttons">
+            <button type="button" class="close" id="cerrarFormHerramienta">Cancelar</button>
+            <button type="submit">Guardar Actividad</button>
+        </div>
+    </form>
+</div>
+
+
+    <script src="obra-detalle.js"></script>
+    <script src="agregar-actividad.js"></script>
+    <script src="finalizar-obra.js"></script>
+    <script src="informe-proyecto.js"></script>
 </body>
 </html>
