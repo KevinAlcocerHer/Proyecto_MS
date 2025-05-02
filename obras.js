@@ -224,22 +224,29 @@ document.addEventListener("DOMContentLoaded", function() {
         formObra.addEventListener('submit', function(e) {
             e.preventDefault();
             
-            // Validar fechas antes de guardar
+            // Obtener todos los campos del formulario
+            const nombre = document.getElementById('name').value;
+            const ubicacion = document.getElementById('ubicacion').value;
+            const duenoPredio = document.getElementById('dueno-predio').value;
+            const presupuesto = document.getElementById('partida-presupuestal').value;
             const fechaInicio = document.getElementById('fecha-inicio').value;
-          
+            
+            // Validar que todos los campos estén completos
+            if (!nombre || !ubicacion || !duenoPredio || !presupuesto || !fechaInicio) {
+                alert("Por favor, complete todos los campos del formulario");
+                return;
+            }
             
             // Crear un objeto con los datos de la obra
             const nuevaObra = {
                 id: 'obra_' + Date.now(), // ID único basado en timestamp
-                nombre: document.getElementById('name').value,
-                ubicacion: document.getElementById('ubicacion').value,
+                nombre: nombre,
+                ubicacion: ubicacion,
+                duenoPredio: duenoPredio,
+                presupuesto: presupuesto,
                 fechaInicio: fechaInicio,
-                fechaFin: null,
-                gastoMaterial: document.getElementById('gasto-material').value,
-                gastoTrabajadores: document.getElementById('gasto-trabajadores').value,
                 // Datos simulados para demostración
-                imagen: 'Obra1.png',
-                 // Por defecto usamos la misma imagen
+                imagen: 'Obra1.png', // Por defecto usamos la misma imagen
                 recibio: 'Usuario Demo',
                 responsable: 'Administrador',
                 // Simulación de trabajadores
@@ -297,7 +304,8 @@ document.addEventListener("DOMContentLoaded", function() {
         // Calcular el porcentaje de progreso
         let porcentajeProgreso = 0;
         const fechaInicio = new Date(obra.fechaInicio);
-        const fechaFin = new Date(obra.fechaFin);
+        const fechaFin = obra.fechaFin ? new Date(obra.fechaFin) : new Date(fechaInicio);
+        fechaFin.setMonth(fechaFin.getMonth() + 3); // Si no hay fecha fin, asumimos 3 meses después
         const hoy = new Date();
         
         if (fechaInicio && fechaFin && !isNaN(fechaInicio) && !isNaN(fechaFin)) {
@@ -322,10 +330,10 @@ document.addEventListener("DOMContentLoaded", function() {
                 </div>
                 <div class="descripcion">
                     <h2 class="text-t">${obra.nombre}</h2>
-                    <h2 class="text-et"><i class='bx bx-map-pin'></i> ${obra.ubicacion}</h2>
-                    <h2 class="text-et"><i class='bx bx-calendar'></i> ${formatearFecha(obra.fechaInicio)} - ${formatearFecha(obra.fechaFin)}</h2>
-                    <h2 class="text-et"><i class='bx bx-dollar-circle'></i> Total gastos material: $${obra.gastoMaterial}</h2>
-                    <h2 class="text-et"><i class='bx bx-user'></i> Total gastos trabajadores: $${obra.gastoTrabajadores}</h2>
+                    <h2 class="text-et"><i class='bx bx-map-pin'></i> Ubicación: ${obra.ubicacion}</h2>
+                    <h2 class="text-et"><i class='bx bx-user'></i> Dueño del predio: ${obra.duenoPredio}</h2>
+                    <h2 class="text-et"><i class='bx bx-dollar-circle'></i> Presupuesto: ${obra.presupuesto}</h2>
+                    <h2 class="text-et"><i class='bx bx-calendar'></i> Fecha de inicio: ${formatearFecha(obra.fechaInicio)}</h2>
                 </div>
                 <div class="text-final">
                     <h2 class="text-t">Semana</h2>
