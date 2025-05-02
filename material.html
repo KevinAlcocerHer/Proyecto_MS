@@ -1297,27 +1297,53 @@
     const modeSwitch = document.querySelector('.toggle-switch');
     const modeText = document.querySelector('.mode-text');
 
-    if (modeSwitch) {
-        modeSwitch.addEventListener('click', () => {
-            body.classList.toggle('dark');
-            
-            if (body.classList.contains('dark')) {
-                modeText.innerText = 'Modo claro';
-            } else {
-                modeText.innerText = 'Modo oscuro';
-            }
-        });
-    }
+
 
     // Toggle para el sidebar
     const toggle = document.querySelector('.toggle');
     const sidebar = document.querySelector('.sidebar');
 
-    if (toggle && sidebar) {
-        toggle.addEventListener('click', () => {
-            sidebar.classList.toggle('close');
+    
+        // Toggle sidebar
+    if (toggle) {
+        toggle.addEventListener("click", () => {
+            sidebar.classList.toggle("close");
+            
+            // Cerrar todos los submenús cuando se cierra/abre el sidebar
+            document.querySelectorAll('.nav-link.open').forEach(item => {
+                item.classList.remove('open');
+            });
         });
     }
+
+        // Tema oscuro y claro
+    if (modeSwitch) {
+        modeSwitch.addEventListener("click", () => {
+            body.classList.toggle("dark");
+            
+            if (body.classList.contains("dark")) {
+                modeText.innerText = "Modo claro";
+                // Guardar el modo oscuro en localStorage
+                localStorage.setItem("theme", "dark");
+            } else {
+                modeText.innerText = "Modo oscuro";
+                // Guardar el modo claro en localStorage
+                localStorage.setItem("theme", "light");
+            }
+        });
+    }
+    
+   // Cargar tema guardado
+   const savedTheme = localStorage.getItem("theme");
+    
+    if (savedTheme === "dark") {
+        body.classList.add("dark");
+        if (modeText) modeText.innerText = "Modo claro";
+    } else {
+        body.classList.remove("dark");
+        if (modeText) modeText.innerText = "Modo oscuro";
+    }
+    
     </script>
     <!-- MODAL PARA REGISTRAR ENTRADA DE MATERIAL -->
     <div class="modal" id="formModalEntradaMaterial">
