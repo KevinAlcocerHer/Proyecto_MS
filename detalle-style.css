@@ -729,7 +729,7 @@ body.dark .tipo-actividad:hover {
     display: flex;
     align-items: center;
     padding: 0.5rem 1rem;
-    background-color: #4CAF50; /* Color verde para finalizar */
+    background-color: var(--primary-color); /* Color verde para finalizar */
     color: white;
     border: none;
     border-radius: 5px;
