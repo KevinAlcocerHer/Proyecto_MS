@@ -17,6 +17,9 @@
         <button id="btnEditar" class="btn-editar">
             <i class='bx bx-edit'></i> Editar Obra
         </button>
+        <button id="btnFinalizar" class="btn-finalizar">
+            <i class='bx bx-check-circle'></i> Finalizar Obra
+        </button>
         <div class="toggle-mode">
             <div class="moon-sun">
                 <i class='bx bx-moon icon moon'></i>
@@ -39,19 +42,23 @@
             <div class="datos-principales">
                 <div class="dato">
                     <i class='bx bx-map-pin'></i>
-                    <p id="obraUbicacion">Ubicación de la obra</p>
-                </div>
-                <div class="dato">
-                    <i class='bx bx-calendar'></i>
-                    <p id="obraFechas">Fecha inicio - Fecha fin</p>
-                </div>
-                <div class="dato">
-                    <i class='bx bx-dollar-circle'></i>
-                    <p id="obraGastoMaterial">Total gastos material: $0</p>
+                    <p id="obraUbicacion">Ubicación</p>
                 </div>
                 <div class="dato">
                     <i class='bx bx-user'></i>
-                    <p id="obraGastoTrabajadores">Total gastos trabajadores: $0</p>
+                    <p id="obraDuenoPredio">Dueño del predio</p>
+                </div>
+                <div class="dato">
+                    <i class='bx bx-file'></i>
+                    <p id="obraNumeroContrato">Número de contrato</p>
+                </div>
+                <div class="dato">
+                    <i class='bx bx-dollar-circle'></i>
+                    <p id="obraPresupuesto">Presupuesto:</p>
+                </div>
+                <div class="dato">
+                    <i class='bx bx-calendar'></i>
+                    <p id="obraFechaInicio">Fecha de inicio</p>
                 </div>
                 <div class="progreso-container">
                     <div class="progreso-info">
@@ -64,6 +71,14 @@
                 </div>
             </div>
         </div>
+
+            <!-- Botón para agregar actividad - NUEVA POSICIÓN -->
+            <div class="agregar-actividad-container">
+                <button id="btnAgregarActividad" class="btn-agregar-actividad">
+                    <i class='bx bx-plus-circle'></i> Agregar Actividad
+                </button>
+            </div>
+
 
         <!-- Sección de Actividades -->
         <div class="actividades-container">
@@ -126,95 +141,184 @@
         </div>
     </div>
 
-    <!-- Modal para editar la obra -->
-    <div class="modal-editar" id="modalEditar">
-        <div class="modal-content-editar">
-            <h2>Editar Obra</h2>
-            <form id="formEditar">
-                <div class="seccion-form">
-                    <h3>Información General</h3>
-                    <label for="editNombre">Nombre de la obra:</label>
-                    <input type="text" id="editNombre" name="editNombre" required>
+    <!-- Modal para editar la obra - Modificado para solo información general -->
+<div class="modal-editar" id="modalEditar">
+    <div class="modal-content-editar">
+        <h2>Editar Información General</h2>
+        <form id="formEditar">
+            <div class="seccion-form">
+                <h3>Información General</h3>
+                <label for="editNombre">Nombre de la obra:</label>
+                <input type="text" id="editNombre" name="editNombre" required>
+            
+                <label for="editUbicacion">Ubicación:</label>
+                <input type="text" id="editUbicacion" name="editUbicacion" required>
+            
+                <label for="editDuenoPredio">Dueño del predio:</label>
+                <input type="text" id="editDuenoPredio" name="editDuenoPredio" required>
 
-                    <label for="editUbicacion">Ubicación:</label>
-                    <input type="text" id="editUbicacion" name="editUbicacion" required>
-
-                    <label for="editFechaInicio">Fecha de inicio:</label>
-                    <input type="date" id="editFechaInicio" name="editFechaInicio" required>
-
+                <label for="editNumeroContrato">Número de contrato:</label>
+                <input type="text" id="editNumeroContrato" name="editNumeroContrato">
+            
+                <label for="editPresupuesto">Presupuesto:</label>
+                <input type="text" id="editPresupuesto" name="editPresupuesto" required>
+            
+                <label for="editFechaInicio">Fecha de inicio:</label>
+                <input type="date" id="editFechaInicio" name="editFechaInicio" required>
+                
+                <!-- Campos que mantenemos para funcionalidad interna pero ocultamos -->
+                <div style="display: none;">
                     <label for="editFechaFin">Fecha de finalización:</label>
-                    <input type="date" id="editFechaFin" name="editFechaFin" required>
-
+                    <input type="date" id="editFechaFin" name="editFechaFin">
+            
                     <label for="editGastoMaterial">Total de gastos de material:</label>
-                    <input type="number" id="editGastoMaterial" name="editGastoMaterial" required>
-
+                    <input type="number" id="editGastoMaterial" name="editGastoMaterial" value="0">
+            
                     <label for="editGastoTrabajadores">Total de gastos en trabajadores:</label>
-                    <input type="number" id="editGastoTrabajadores" name="editGastoTrabajadores" required>
+                    <input type="number" id="editGastoTrabajadores" name="editGastoTrabajadores" value="0">
                 </div>
+            </div>
 
-                <div class="seccion-form">
-                    <h3>Actividad: Entrada de Material</h3>
-                    <label for="editFechaEntrada">Fecha de entrada:</label>
-                    <input type="date" id="editFechaEntrada" name="editFechaEntrada">
+            <!-- El resto de las secciones permanecen en el HTML pero se ocultan con JavaScript -->
+            <div class="seccion-form" style="display: none;">
+                <h3>Actividad: Entrada de Material</h3>
+                <!-- ... resto del contenido ... -->
+            </div>
 
-                    <label for="editRecibio">Recibió:</label>
-                    <input type="text" id="editRecibio" name="editRecibio">
+            <div class="seccion-form" style="display: none;">
+                <h3>Actividad: Lista raya</h3>
+                <!-- ... resto del contenido ... -->
+            </div>
 
-                    <label for="editCantidad">Cantidad:</label>
-                    <input type="number" id="editCantidad" name="editCantidad">
+            <div class="seccion-form" style="display: none;">
+                <h3>Trabajadores</h3>
+                <!-- ... resto del contenido ... -->
+            </div>
+
+            <div class="seccion-form" style="display: none;">
+                <h3>Actividad: Entrada Herramienta</h3>
+                <!-- ... resto del contenido ... -->
+            </div>
+
+            <div class="seccion-form" style="display: none;">
+                <h3>Herramientas</h3>
+                <!-- ... resto del contenido ... -->
+            </div>
+
+            <div class="buttons">
+                <button type="button" class="close" id="cerrarModalEditar">Cancelar</button>
+                <button type="submit">Guardar Cambios</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<!-- Modal para agregar actividad -->
+<div class="modal-agregar-actividad" id="modalAgregarActividad">
+    <div class="modal-content-agregar">
+        
+        <!-- Selector de tipo de actividad -->
+        <div class="seleccion-tipo-actividad" id="seleccionTipoActividad">
+            <h3>Seleccione el tipo de actividad</h3>
+            <div class="tipos-actividad">
+                <div class="tipo-actividad" data-tipo="material">
+                    <i class='bx bx-package'></i>
+                    <span>Entrada de Material</span>
                 </div>
-
-                <div class="seccion-form">
-                    <h3>Actividad: Lista raya</h3>
-                    <label for="editFechaCorte">Fecha de corte:</label>
-                    <input type="date" id="editFechaCorte" name="editFechaCorte">
-
-                    <label for="editResponsablePagar">Responsable pagar:</label>
-                    <input type="text" id="editResponsablePagar" name="editResponsablePagar">
-
-                    <label for="editPagado">Pagado:</label>
-                    <select id="editPagado" name="editPagado">
-                        <option value="Sí">Sí</option>
-                        <option value="No">No</option>
-                    </select>
+                <div class="tipo-actividad" data-tipo="listaRaya">
+                    <i class='bx bx-list-check'></i>
+                    <span>Lista Raya</span>
                 </div>
-
-                <div class="seccion-form">
-                    <h3>Trabajadores</h3>
-                    <div id="listaTrabajadoresEditable" class="lista-editable">
-                        <!-- Los elementos se añadirán dinámicamente -->
-                    </div>
-                    <span class="agregar-item" id="agregarTrabajador">+ Agregar trabajador</span>
+                <div class="tipo-actividad" data-tipo="herramienta">
+                    <i class='bx bx-wrench'></i>
+                    <span>Entrada Herramienta</span>
                 </div>
-
-                <div class="seccion-form">
-                    <h3>Actividad: Entrada Herramienta</h3>
-                    <label for="editFechaEntrega">Fecha de entrega:</label>
-                    <input type="date" id="editFechaEntrega" name="editFechaEntrega">
-
-                    <label for="editResponsableEntrega">Responsable Entrega:</label>
-                    <input type="text" id="editResponsableEntrega" name="editResponsableEntrega">
-
-                    <label for="editResponsableRecibe">Responsable Recibe:</label>
-                    <input type="text" id="editResponsableRecibe" name="editResponsableRecibe">
-                </div>
-
-                <div class="seccion-form">
-                    <h3>Herramientas</h3>
-                    <div id="listaHerramientasEditable" class="lista-editable">
-                        <!-- Los elementos se añadirán dinámicamente -->
-                    </div>
-                    <span class="agregar-item" id="agregarHerramienta">+ Agregar herramienta</span>
-                </div>
-
+            </div>
+        </div>
+        
+        <!-- Formulario para Entrada de Material -->
+        <div class="formulario-actividad" id="formMaterial" style="display: none;">
+            <h3>Actividad: Entrada de Material</h3>
+            <form id="formAgregarMaterial">
+                <label for="nuevoFechaEntrada">Fecha de entrada:</label>
+                <input type="date" id="nuevoFechaEntrada" name="nuevoFechaEntrada" required>
+                
+                <label for="nuevoRecibio">Recibió:</label>
+                <input type="text" id="nuevoRecibio" name="nuevoRecibio" required>
+                
+                <label for="nuevoCantidad">Cantidad:</label>
+                <input type="number" id="nuevoCantidad" name="nuevoCantidad" required>
+                
+                <label for="nuevoTipoMaterial">Tipo de Material:</label>
+                <input type="text" id="nuevoTipoMaterial" name="nuevoTipoMaterial" required>
+                
                 <div class="buttons">
-                    <button type="button" class="close" id="cerrarModalEditar">Cancelar</button>
-                    <button type="submit">Guardar Cambios</button>
+                    <button type="button" class="close" id="cerrarFormMaterial">Cancelar</button>
+                    <button type="submit">Guardar Actividad</button>
+                </div>
+            </form>
+        </div>
+        
+        <!-- Formulario para Lista Raya -->
+        <div class="formulario-actividad" id="formListaRaya" style="display: none;">
+            <h3>Actividad: Lista Raya</h3>
+            <form id="formAgregarListaRaya">
+                <label for="nuevoFechaCorte">Fecha de corte:</label>
+                <input type="date" id="nuevoFechaCorte" name="nuevoFechaCorte" required>
+                
+                <label for="nuevoResponsablePagar">Responsable pagar:</label>
+                <input type="text" id="nuevoResponsablePagar" name="nuevoResponsablePagar" required>
+                
+                <label for="nuevoPagado">Pagado:</label>
+                <select id="nuevoPagado" name="nuevoPagado" required>
+                    <option value="Sí">Sí</option>
+                    <option value="No">No</option>
+                </select>
+                
+                <h4>Trabajadores</h4>
+                <div id="nuevoListaTrabajadores" class="lista-editable">
+                    <!-- Se añadirán dinámicamente -->
+                </div>
+                <span class="agregar-item" id="nuevoAgregarTrabajador">+ Agregar trabajador</span>
+                
+                <div class="buttons">
+                    <button type="button" class="close" id="cerrarFormListaRaya">Cancelar</button>
+                    <button type="submit">Guardar Actividad</button>
+                </div>
+            </form>
+        </div>
+        
+        <!-- Formulario para Entrada Herramienta -->
+        <div class="formulario-actividad" id="formHerramienta" style="display: none;">
+            <h3>Actividad: Entrada Herramienta</h3>
+            <form id="formAgregarHerramienta">
+                <label for="nuevoFechaEntrega">Fecha de entrega:</label>
+                <input type="date" id="nuevoFechaEntrega" name="nuevoFechaEntrega" required>
+                
+                <label for="nuevoResponsableEntrega">Responsable Entrega:</label>
+                <input type="text" id="nuevoResponsableEntrega" name="nuevoResponsableEntrega" required>
+                
+                <label for="nuevoResponsableRecibe">Responsable Recibe:</label>
+                <input type="text" id="nuevoResponsableRecibe" name="nuevoResponsableRecibe" required>
+                
+                <h4>Herramientas</h4>
+                <div id="nuevoListaHerramientas" class="lista-editable">
+                    <!-- Se añadirán dinámicamente -->
+                </div>
+                <span class="agregar-item" id="nuevoAgregarHerramienta">+ Agregar herramienta</span>
+                
+                <div class="buttons">
+                    <button type="button" class="close" id="cerrarFormHerramienta">Cancelar</button>
+                    <button type="submit">Guardar Actividad</button>
                 </div>
             </form>
         </div>
     </div>
+</div>
 
     <script src="obra-detalle.js"></script>
+    <script src="agregar-actividad.js"></script>
+    <script src="finalizar-obra.js"></script>
 </body>
 </html>
