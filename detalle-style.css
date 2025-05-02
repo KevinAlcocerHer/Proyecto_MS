@@ -572,3 +572,206 @@ body.dark .actividad-tarjeta {
     background-color: var(--text-color-ticket-mouse);
     border: 1px solid var(--text-color);
 }
+
+/* Estilos para el botón de agregar actividad */
+.agregar-actividad-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 1rem;
+}
+
+.btn-agregar-actividad {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: var(--tran-03);
+}
+
+.btn-agregar-actividad i {
+    margin-right: 0.5rem;
+    font-size: 1.2rem;
+}
+
+.btn-agregar-actividad:hover {
+    background-color: var(--text-color-ticket-mouse);
+    border: 1px solid var(--text-color);
+}
+
+/* Estilos para el modal de agregar actividad */
+.modal-agregar-actividad {
+    display: none; /* Oculto por defecto */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+    overflow-y: auto;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 2rem 0;
+}
+
+.modal-content-agregar {
+    background-color: var(--body-color);
+    width: 90%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    color: var(--text-color-ticket);
+}
+
+/* Estilos para la selección de tipo de actividad */
+.seleccion-tipo-actividad h3 {
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.tipos-actividad {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.tipo-actividad {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1.5rem;
+    border: 2px solid var(--primary-color-light);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: var(--tran-03);
+    width: 150px;
+}
+
+.tipo-actividad i {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+}
+
+.tipo-actividad span {
+    font-weight: 500;
+    color: var(--text-color-ticket);
+}
+
+.tipo-actividad:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    border-color: var(--primary-color);
+}
+
+.tipo-actividad.seleccionado {
+    background-color: var(--primary-color-light);
+    border-color: var(--primary-color);
+}
+
+/* Estilos para formularios de actividad */
+.formulario-actividad h3 {
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--primary-color-light);
+}
+
+.formulario-actividad h4 {
+    margin: 1.5rem 0 0.5rem;
+}
+
+.formulario-actividad label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--text-color-ticket);
+}
+
+.formulario-actividad input,
+.formulario-actividad select {
+    width: 100%;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    border: 1px solid var(--primary-color-light);
+    border-radius: 4px;
+    background-color: var(--body-color);
+    color: var(--text-color-ticket);
+}
+
+/* Ajustes para modo oscuro */
+body.dark .tipo-actividad {
+    border-color: var(--primary-color);
+}
+
+body.dark .tipo-actividad.seleccionado {
+    background-color: var(--primary-color);
+}
+
+body.dark .tipo-actividad:hover {
+    border-color: var(--toggle-color);
+}
+
+/* Estilos para los botones en la cabecera */
+.botones-obra {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-finalizar {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    background-color: #4CAF50; /* Color verde para finalizar */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: var(--tran-03);
+    width: auto;
+}
+
+.btn-finalizar i {
+    margin-right: 0.5rem;
+    font-size: 1.2rem;
+}
+
+.btn-finalizar:hover {
+    background-color: #45a049;
+    border: 1px solid var(--text-color);
+}
+
+/* Estilos para la obra finalizada */
+.obra-finalizada {
+    position: relative;
+}
+
+.obra-finalizada::after {
+    content: 'FINALIZADA';
+    position: absolute;
+    top: 20px;
+    right: -30px;
+    background-color: #4CAF50;
+    color: white;
+    padding: 5px 30px;
+    transform: rotate(45deg);
+    font-weight: bold;
+    font-size: 0.8rem;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    z-index: 10;
+}
+
+/* Deshabilitar botones cuando la obra está finalizada */
+.obra-finalizada-botones {
+    opacity: 0.6;
+    cursor: not-allowed !important;
+    pointer-events: none;
+}
