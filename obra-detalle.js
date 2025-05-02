@@ -100,6 +100,7 @@ document.addEventListener("DOMContentLoaded", function() {
         if (obra) {
             // Guardar la obra actual en variable global
             obraActual = obra;
+            window.obraActual = obra;
             
             // Rellenar los datos en la página
             document.title = "Obra: " + obra.nombre + " | TecnoBuild";
@@ -297,6 +298,9 @@ document.addEventListener("DOMContentLoaded", function() {
         modalEditar.style.display = "none";
         document.body.style.overflow = "auto"; // Restaurar scroll
         
+        if (typeof window.actualizarInformacionProyecto === 'function') {
+            window.actualizarInformacionProyecto();
+        }
         // Mostrar mensaje de éxito
         alert("Información general actualizada correctamente");
     }
