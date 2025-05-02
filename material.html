@@ -814,40 +814,10 @@
                         <th>Cantidad en almacén</th>
                         <th>Precio unitario</th>
                         <th>Proveedor</th>
-                        <th>Estado</th>
+                      
                     </tr>
                 </thead>
                 <tbody id="material-tbody">
-                    <!-- La tabla se llenará dinámicamente con JavaScript -->
-                </tbody>
-            </table>
-        </div>
-    </section>
-
-    <!-- TABLA DE MOVIMIENTOS DE MATERIAL -->
-    <section class="tabla-container">
-        <div class="tabla-header">
-            <h2 class="tabla-title">Entradas de Material en Obra</h2>
-            <div class="tabla-actions">
-                <button id="openModalEntradaMaterial" class="add"><i class='bx bx-plus'></i> Registrar Entrada</button>
-                <button id="openDeleteModalEntradaMaterial" class="remove"><i class='bx bx-trash'></i> Eliminar</button>
-            </div>
-        </div>
-        <div class="tabla-wrapper">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Material</th>
-                        <th>Cantidad</th>
-                        <th>Fecha entrega</th>
-                        <th>Semana de Obra</th>
-                        <th>Responsable entrega</th>
-                        <th>Responsable recibe</th>
-                        <th>Precio Total</th>
-                        <th>Factura/Remisión</th>
-                    </tr>
-                </thead>
-                <tbody id="entrada-material-tbody">
                     <!-- La tabla se llenará dinámicamente con JavaScript -->
                 </tbody>
             </table>
@@ -891,15 +861,7 @@
                     <label for="proveedor-material">Proveedor:</label>
                     <input type="text" id="proveedor-material" name="proveedor-material" placeholder="Nombre del proveedor">
 
-                    <label for="estado-material">Estado:</label>
-                    <select id="estado-material" name="estado-material" required>
-                        <option value="">Seleccione un estado</option>
-                        <option value="disponible">Disponible</option>
-                        <option value="bajo">Stock bajo</option>
-                        <option value="agotado">Agotado</option>
-                        <option value="reservado">Reservado para obra</option>
-                    </select>
-                    
+                
                     <label for="descripcion-material">Descripción adicional:</label>
                     <textarea id="descripcion-material" name="descripcion-material" rows="3" maxlength="200" placeholder="Describa características adicionales, especificaciones, etc..."></textarea>
                 </fieldset>
@@ -1019,7 +981,7 @@
                     cantidad: "120",
                     precio: "185.50",
                     proveedor: "CEMEX",
-                    estado: "Disponible"
+                  
                 },
                 {
                     nombre: "Arena Lavada",
@@ -1028,7 +990,7 @@
                     cantidad: "45",
                     precio: "450.00",
                     proveedor: "Arenera del Valle",
-                    estado: "Disponible"
+             
                 },
                 {
                     nombre: "Varilla 3/8\"",
@@ -1037,7 +999,7 @@
                     cantidad: "200",
                     precio: "125.75",
                     proveedor: "Aceros del Norte",
-                    estado: "Stock bajo"
+                   
                 }
             ];
             
@@ -1050,7 +1012,7 @@
                     <td>${material.cantidad}</td>
                     <td>${formatPrice(material.precio)}</td>
                     <td>${material.proveedor}</td>
-                    <td>${material.estado}</td>
+                   
                 `;
                 tbodyMaterial.appendChild(materialRow);
             });
