@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Simulación de carga y luego redirección
         setTimeout(() => {
             // Redirección a la página del sistema
-            window.location.href = 'obras.html'; // Reemplaza con la ruta a tu página HTML
+            window.location.href = 'Principal/obras.html'; // Reemplaza con la ruta a tu página HTML
             
             // Nota: El código después de la redirección no se ejecutará
             // ya que el navegador cargará la nueva página
