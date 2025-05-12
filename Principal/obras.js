@@ -324,7 +324,7 @@ document.addEventListener("DOMContentLoaded", function() {
         
         // HTML para la tarjeta
         seccionEtiqueta.innerHTML = `
-            <a href="obra-detalle.html?id=${obra.id}" class="etiqueta">
+            <a href="/Principal/detalle/obra-detalle.html?id=${obra.id}" class="etiqueta">
                 <div class="imagen">
                     <img src="${obra.imagen}" alt="Imagen de ${obra.nombre}">
                 </div>
