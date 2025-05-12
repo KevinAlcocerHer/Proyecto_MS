@@ -188,7 +188,7 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         } else {
             alert("No se encontró la obra especificada");
-            window.location.href = "obras.html"; // Redirigir si no se encuentra
+            window.location.href = "/Principal/obras.html"; // Redirigir si no se encuentra
         }
     }
 
